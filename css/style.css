@@ -276,7 +276,7 @@ ul { list-style: none; }
 }
 
 .nav-logo-img {
-  height: 48px;
+  height: 56px;
   width: auto;
   transition: opacity var(--transition);
 }
@@ -285,7 +285,7 @@ ul { list-style: none; }
 
 .nav-logo-text {
   font-weight: 900;
-  font-size: 1.6rem;
+  font-size: 1.4rem;
   letter-spacing: -0.02em;
   color: var(--white);
   line-height: 1;
@@ -1636,10 +1636,10 @@ ul { list-style: none; }
   gap: 0.5rem;
   margin-bottom: 1rem;
 }
-.footer__logo-img { height: 48px; width: auto; }
+.footer__logo-img { height: 56px; width: auto; }
 .footer__logo-text {
   font-weight: 900;
-  font-size: 1.6rem;
+  font-size: 1.4rem;
   letter-spacing: -0.02em;
   color: var(--white);
   line-height: 1;
