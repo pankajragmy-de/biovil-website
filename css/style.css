@@ -268,26 +268,13 @@ ul { list-style: none; }
   justify-content: space-between;
 }
 
-.nav-logo img {
-  height: 44px;
+.nav-logo-img {
+  height: 48px;
   width: auto;
+  transition: opacity var(--transition);
 }
 .nav-logo-dark  { display: none; }
 .nav-logo-light { display: block; }
-
-/* Text fallback logo (shown when image not loaded) */
-.nav-logo-text {
-  font-weight: 900;
-  font-size: 1.4rem;
-  letter-spacing: -0.02em;
-  color: var(--white);
-  display: flex;
-  align-items: center;
-  gap: 0.3rem;
-  line-height: 1;
-  white-space: nowrap;
-}
-.navbar.scrolled .nav-logo-text { color: var(--green-700); }
 
 .nav-links {
   display: flex;
