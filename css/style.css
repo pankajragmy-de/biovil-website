@@ -1725,3 +1725,153 @@ ul { list-style: none; }
   .btn { width: 100%; justify-content: center; }
   .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
 }
+
+/* ============================================
+   RESPONSIVE DESIGN (Media Queries)
+   ============================================ */
+
+/* --- TABLETS (Below 900px max-width) --- */
+@media (max-width: 900px) {
+  /* Typography & Spacing */
+  :root {
+    --section-padding: 4rem 0;
+  }
+  
+  .section-title {
+    font-size: clamp(1.8rem, 5vw, 2.5rem);
+  }
+  
+  /* Grids */
+  .card-grid,
+  .card-grid-2 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 3rem 2rem;
+  }
+  
+  .problem-grid,
+  .two-col-mission,
+  .form-grid {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+  
+  .process-flow {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 3rem 2rem;
+  }
+  
+  /* Timeline */
+  .timeline::before {
+    left: 40px;
+  }
+  
+  .timeline-item {
+    grid-template-columns: 80px 1fr !important;
+    margin-bottom: 2.5rem;
+  }
+  
+  .timeline-item__dot {
+    grid-column: 1 !important;
+    justify-content: flex-start;
+    padding-left: 30px;
+  }
+  
+  .timeline-item__card,
+  .timeline-item:nth-child(even) .timeline-item__card,
+  .timeline-item:nth-child(odd) .timeline-item__card {
+    grid-column: 2 !important;
+    margin: 0 !important;
+  }
+
+  .timeline-item__empty {
+    display: none !important;
+  }
+
+  /* Footer */
+  .footer__grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 3rem 2rem;
+  }
+}
+
+/* --- MOBILE PHONES (Below 600px max-width) --- */
+@media (max-width: 600px) {
+  /* Navigation */
+  .nav-links, .nav-cta {
+    display: none;
+  }
+  
+  .nav-burger {
+    display: flex;
+  }
+  
+  /* Typography & Spacing */
+  :root {
+    --section-padding: 3rem 0;
+  }
+  
+  .hero {
+    padding-top: 6rem;
+  }
+  
+  .hero__title {
+    font-size: clamp(2.2rem, 8vw, 2.8rem);
+  }
+  
+  /* Grids Collapse to 1 Column */
+  .card-grid,
+  .card-grid-2,
+  .stats-grid,
+  .process-flow,
+  .footer__grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  
+  /* Specific Elements */
+  .pull-quote {
+    font-size: var(--font-size-lg);
+    padding: 1.25rem;
+  }
+  
+  .btn-group {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .btn-group .btn {
+    width: 100%;
+    justify-content: center;
+  }
+  
+  .hero__trust {
+    justify-content: center;
+  }
+
+  /* Iceberg */
+  .iceberg-diagram__top,
+  .iceberg-diagram__bottom {
+    padding: 1.5rem;
+  }
+
+  /* Tabs (Resource Page) */
+  .tab-nav {
+    overflow-x: auto;
+    white-space: nowrap;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 5px; /* space for scrollbar */
+  }
+  
+  .tab-btn {
+    padding: 1rem;
+  }
+  
+  /* Circular widget */
+  .circular-content-panel {
+    padding: 2rem 1.5rem;
+  }
+}
