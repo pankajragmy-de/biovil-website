@@ -1875,3 +1875,11 @@ ul { list-style: none; }
     padding: 2rem 1.5rem;
   }
 }
+
+/* Fix for inline collapse grids */
+@media (max-width: 900px) {
+  .collapse-grid-mobile {
+    grid-template-columns: 1fr !important;
+    gap: 2rem !important;
+  }
+}
