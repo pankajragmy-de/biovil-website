@@ -312,15 +312,28 @@ ul { list-style: none; }
   padding: 4px;
   background: none;
   border: none;
+  z-index: 1001; /* Ensure above mobile menu */
 }
 .nav-burger span {
   display: block;
   width: 26px; height: 2px;
   background: var(--white);
   border-radius: 2px;
-  transition: all var(--transition);
+  transition: all 0.3s ease-in-out;
+  transform-origin: center;
 }
-.navbar.scrolled .nav-burger span { background: var(--grey-800); }
+.navbar.scrolled:not(.menu-open) .nav-burger span { background: var(--grey-800); }
+
+/* Animate to X */
+.nav-burger.open span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+.nav-burger.open span:nth-child(2) {
+  opacity: 0;
+}
+.nav-burger.open span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
 
 .nav-mobile {
   display: none;
@@ -342,16 +355,17 @@ ul { list-style: none; }
 }
 
 .nav-mobile-close {
-  position: absolute;
-  top: 1.5rem; right: 1.5rem;
-  background: none; border: none;
-  color: var(--white);
-  font-size: 2.5rem;
-  cursor: pointer;
-  line-height: 1;
-  padding: 10px;
-  z-index: 1000;
+  display: none !important; /* Replaced by animated burger */
 }
+
+/* Ensure navbar blends into modal when open */
+.navbar.menu-open {
+  background: transparent !important;
+  box-shadow: none !important;
+}
+.navbar.menu-open .nav-logo-dark { display: none !important; }
+.navbar.menu-open .nav-logo-light { display: block !important; }
+
 
 /* ============================================
    HORIZONTAL SCROLL DIAGRAM (Awwwards Style)

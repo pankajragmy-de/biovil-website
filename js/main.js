@@ -15,16 +15,31 @@ const burger = document.querySelector('.nav-burger');
 const mobileMenu = document.querySelector('.nav-mobile');
 const mobileClose = document.querySelector('.nav-mobile-close');
 
-if (burger && mobileMenu) {
-  burger.addEventListener('click', () => mobileMenu.classList.add('open'));
+function toggleMobileMenu(forceClose = false) {
+  if (!mobileMenu) return;
+  const isOpening = !forceClose && !mobileMenu.classList.contains('open');
+  
+  if (isOpening) {
+    mobileMenu.classList.add('open');
+    if (burger) burger.classList.add('open');
+    if (navbar) navbar.classList.add('menu-open');
+  } else {
+    mobileMenu.classList.remove('open');
+    if (burger) burger.classList.remove('open');
+    if (navbar) navbar.classList.remove('menu-open');
+  }
 }
-if (mobileClose && mobileMenu) {
-  mobileClose.addEventListener('click', () => mobileMenu.classList.remove('open'));
+
+if (burger) {
+  burger.addEventListener('click', () => toggleMobileMenu());
+}
+if (mobileClose) {
+  mobileClose.addEventListener('click', () => toggleMobileMenu(true));
 }
 
 // Close mobile menu on link click (only for actual anchor tags)
 document.querySelectorAll('.nav-mobile a.nav-link').forEach(link => {
-  link.addEventListener('click', () => mobileMenu && mobileMenu.classList.remove('open'));
+  link.addEventListener('click', () => toggleMobileMenu(true));
 });
 
 // Mobile dropdown toggle
