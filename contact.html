@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact Us, BioViL</title>
+  <meta name="description" content="Get in touch with BioViL, whether you're a farmer, partner, investor, or researcher, we'd love to hear from you." />
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    /* Contact-specific */
+    .pathway-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      margin-top: 2.5rem;
+    }
+    .pathway-card {
+      background: var(--white);
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow-md);
+      padding: 2rem;
+      cursor: pointer;
+      transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
+      border: 2px solid transparent;
+    }
+    .pathway-card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-lg);
+    }
+    .pathway-card--farmer:hover  { border-color: var(--green-700); }
+    .pathway-card--partner:hover { border-color: var(--blue-700); }
+    .pathway-card--investor:hover{ border-color: var(--dark-navy); }
+    .pathway-icon {
+      width: 56px; height: 56px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.6rem; margin-bottom: 1.25rem;
+    }
+    .pathway-icon--farmer   { background: var(--green-50); }
+    .pathway-icon--partner  { background: var(--blue-50); }
+    .pathway-icon--investor { background: #e8eaf6; }
+    .pathway-card__title { font-size: 1.2rem; font-weight: 700; color: var(--grey-900); margin-bottom: 0.75rem; }
+    .pathway-card__body  { font-size: 0.88rem; color: var(--grey-600); line-height: 1.7; margin-bottom: 1.25rem; }
+
+    /* Contact layout */
+    .contact-layout {
+      display: grid;
+      grid-template-columns: 1fr 340px;
+      gap: 4rem;
+      align-items: start;
+    }
+    .contact-form-card {
+      background: var(--white);
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow-lg);
+      padding: 2.5rem;
+    }
+    .direct-channels { display: flex; flex-direction: column; gap: 1.5rem; }
+    .channel {
+      display: flex; align-items: flex-start; gap: 1rem;
+      padding: 1.25rem;
+      background: var(--grey-50);
+      border-radius: var(--radius-md);
+    }
+    .channel__icon {
+      width: 42px; height: 42px; border-radius: 50%;
+      background: var(--green-50);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem; flex-shrink: 0;
+    }
+    .channel__label { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--grey-400); }
+    .channel__value { font-size: 0.9rem; color: var(--grey-800); font-weight: 500; margin-top: 0.15rem; }
+
+    @media(max-width:900px){
+      .pathway-cards   { grid-template-columns: 1fr; }
+      .contact-layout  { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+  <div class="container navbar__inner">
+    <a href="index.html" class="nav-logo">
+      <span class="nav-logo-text">🌿 BioViL</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html" class="nav-link">Home</a></li>
+      <li><a href="about.html" class="nav-link">About Us</a></li>
+      <li><a href="journey.html" class="nav-link">Our Journey</a></li>
+      <li class="nav-item-dropdown">
+        <a href="#" class="nav-link">Projects <svg class="icon-svg" viewBox="0 0 24 24" style="width:14px;height:14px;margin-left:4px"><polyline points="6 9 12 15 18 9"></polyline></svg></a>
+        <ul class="dropdown-menu">
+          <li><a href="prototype-1.html">Prototype I</a></li>
+        </ul>
+      </li>
+      <li><a href="resource.html" class="nav-link">Resource</a></li>
+    </ul>
+    <a href="contact.html" class="btn btn-primary nav-cta">Get Involved →</a>
+    <button class="nav-burger"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<!-- MOBILE NAV -->
+<div class="nav-mobile">
+  <button class="nav-mobile-close">✕</button>
+  <a href="index.html" class="nav-link">Home</a>
+  <a href="about.html" class="nav-link">About Us</a>
+  <a href="journey.html" class="nav-link">Our Journey</a>
+  <div class="nav-mobile-dropdown">
+    <span class="nav-link" style="color:var(--grey-800);display:block;margin-bottom:0.5rem">Projects ▾</span>
+    <div class="nav-mobile-dropdown-content" style="border-left:2px solid var(--grey-200);margin-left:1rem;display:flex;flex-direction:column;gap:0.5rem">
+      <a href="prototype-1.html" class="nav-link" style="padding-left:1rem;font-size:1rem">Prototype I</a>
+    </div>
+  </div>
+  <a href="resource.html" class="nav-link">Resource</a>
+  <a href="contact.html" class="btn btn-primary" style="margin-top:1rem">Get Involved →</a>
+</div>
+
+<!-- HERO -->
+<section class="hero-inner">
+  <div class="hero-inner__bg" style="background-image:url('https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=1920&q=80')"></div>
+  <div class="hero-inner__overlay"></div>
+  <div class="container">
+    <div class="hero-inner__content">
+      <span class="section-label section-label--white">Let's Build Together</span>
+      <h1 class="section-title section-title--white mt-2" style="font-size:clamp(2.5rem,5vw,4rem)">
+        Every Partnership Starts<br>With Hello.
+      </h1>
+      <p class="section-sub section-sub--white mt-3">
+        Whether you're a farmer ready to convert your waste, an organisation looking to partner,
+        or an investor seeking meaningful impact, this is where it begins.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- AUDIENCE PATHWAYS -->
+<section class="section" style="background:var(--grey-50)">
+  <div class="container">
+    <span class="section-label">Who Are You?</span>
+    <h2 class="section-title">Find Your Path Into BioViL.</h2>
+    <div class="pathway-cards">
+
+      <div class="pathway-card pathway-card--farmer reveal" data-scroll-to="#contact-form">
+        <div class="pathway-icon pathway-icon--farmer">🌾</div>
+        <h3 class="pathway-card__title">I'm a Farmer</h3>
+        <p class="pathway-card__body">
+          Do you have agricultural land with crop waste or animal dung? You may be eligible to host a
+          BioViL biodigester, earning clean fuel and additional income from waste you'd otherwise discard.
+        </p>
+        <button class="btn btn-primary" style="font-size:0.85rem;padding:0.7rem 1.5rem" data-scroll-to="#contact-form" onclick="document.getElementById('role-select').value='farmer';document.getElementById('contact-form').scrollIntoView({behavior:'smooth'})">
+          Join as a Farmer →
+        </button>
+      </div>
+
+      <div class="pathway-card pathway-card--partner reveal reveal-delay-1" data-scroll-to="#contact-form">
+        <div class="pathway-icon pathway-icon--partner">🤝</div>
+        <h3 class="pathway-card__title">I'm an Organisation</h3>
+        <p class="pathway-card__body">
+          Looking to bring clean energy to the communities you serve? Partner with BioViL to
+          co-implement, co-fund, or co-research waste-to-energy solutions at the village level.
+        </p>
+        <button class="btn btn-blue" style="font-size:0.85rem;padding:0.7rem 1.5rem" onclick="document.getElementById('role-select').value='partner';document.getElementById('contact-form').scrollIntoView({behavior:'smooth'})">
+          Explore a Partnership →
+        </button>
+      </div>
+
+      <div class="pathway-card pathway-card--investor reveal reveal-delay-2" data-scroll-to="#contact-form">
+        <div class="pathway-icon pathway-icon--investor">💹</div>
+        <h3 class="pathway-card__title">I'm an Investor</h3>
+        <p class="pathway-card__body">
+          BioViL's Farm-to-Business model offers multiple revenue channels, biogas sales, carbon credits,
+          organic fertilizer, alongside measurable social and environmental returns.
+        </p>
+        <button class="btn btn-outline--green" style="font-size:0.85rem;padding:0.7rem 1.5rem" onclick="document.getElementById('role-select').value='investor';document.getElementById('contact-form').scrollIntoView({behavior:'smooth'})">
+          Request Investment Info →
+        </button>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT FORM + CHANNELS -->
+<section class="section" id="contact-form-section">
+  <div class="container">
+    <div class="contact-layout">
+
+      <!-- FORM -->
+      <div>
+        <span class="section-label">Get in Touch</span>
+        <h2 class="section-title">Send Us a Message.</h2>
+        <p class="section-sub mt-2">We read every message personally and respond within 48 hours.</p>
+
+        <div class="contact-form-card mt-4">
+          <form id="biovil-contact-form" novalidate>
+            <div class="form-grid">
+              <div class="form-group">
+                <label for="name">Full Name *</label>
+                <input type="text" id="name" name="name" placeholder="Your full name" required />
+              </div>
+              <div class="form-group">
+                <label for="org">Organisation</label>
+                <input type="text" id="org" name="organisation" placeholder="Optional" />
+              </div>
+              <div class="form-group">
+                <label for="email">Email Address *</label>
+                <input type="email" id="email" name="email" placeholder="you@example.com" required />
+              </div>
+              <div class="form-group">
+                <label for="phone">Phone / WhatsApp</label>
+                <input type="tel" id="phone" name="phone" placeholder="Optional" />
+              </div>
+              <div class="form-group form-grid--full">
+                <label for="role-select">I am a... *</label>
+                <select id="role-select" name="role" required>
+                  <option value="">Select Option</option>
+                  <option value="farmer">A Farmer interested in BioViL</option>
+                  <option value="partner">An Organisation / NGO / Institution</option>
+                  <option value="investor">An Investor or Funder</option>
+                  <option value="researcher">A Researcher or Academic</option>
+                  <option value="other">Just curious / Other</option>
+                </select>
+              </div>
+              <div class="form-group form-grid--full">
+                <label for="subject">Subject *</label>
+                <input type="text" id="subject" name="subject" placeholder="How can we help?" required />
+              </div>
+              <div class="form-group form-grid--full">
+                <label for="message">Your Message *</label>
+                <textarea id="message" name="message" placeholder="Tell us about yourself and how you'd like to get involved..." required></textarea>
+              </div>
+            </div>
+            <button type="submit" class="btn btn-primary mt-4" style="width:100%;justify-content:center;font-size:1rem;padding:1rem">
+              Send Message →
+            </button>
+          </form>
+          <div class="form-success">
+            🌿 Thank you! Pankaj will be in touch within 48 hours.
+          </div>
+        </div>
+      </div>
+
+      <!-- DIRECT CHANNELS -->
+      <div>
+        <span class="section-label">Or reach us directly</span>
+        <h3 class="section-title mt-2" style="font-size:1.75rem">Other Ways to Connect</h3>
+        <div class="direct-channels mt-4">
+          <div class="channel reveal">
+            <div class="channel__icon">✉️</div>
+            <div>
+              <div class="channel__label">Email</div>
+              <div class="channel__value"><a href="mailto:contact@biovil.co.in" style="color:var(--green-700)">contact@biovil.co.in</a></div>
+            </div>
+          </div>
+          <div class="channel reveal reveal-delay-1">
+            <div class="channel__icon">💬</div>
+            <div>
+              <div class="channel__label">WhatsApp</div>
+              <div class="channel__value"><a href="https://wa.me/91XXXXXXXXXX" style="color:var(--green-700)">+91 XXXXXXXXXX</a></div>
+            </div>
+          </div>
+          <div class="channel reveal reveal-delay-2">
+            <div class="channel__icon">📍</div>
+            <div>
+              <div class="channel__label">Pilot Location</div>
+              <div class="channel__value">Assam, India (Field Site)</div>
+            </div>
+          </div>
+          <div class="channel reveal reveal-delay-3">
+            <div class="channel__icon">🏆</div>
+            <div>
+              <div class="channel__label">Fellowship</div>
+              <div class="channel__value">Mercedes-Benz beVisioneers 2024</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Social links -->
+        <div class="mt-4 reveal">
+          <div class="section-label">Follow Our Journey</div>
+          <div class="footer__socials mt-2" style="gap:0.75rem">
+            <a href="#" class="social-icon" style="background:var(--blue-700);color:white;text-decoration:none" title="LinkedIn">in</a>
+            <a href="#" class="social-icon" style="background:var(--green-700);color:white;text-decoration:none" title="Instagram">📷</a>
+            <a href="#" class="social-icon" style="background:#25d366;color:white;text-decoration:none" title="WhatsApp">💬</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="section" style="background:var(--grey-50)">
+  <div class="container">
+    <span class="section-label">Common Questions</span>
+    <h2 class="section-title">FAQs</h2>
+    <div class="accordion mt-6">
+      <div class="accordion-item">
+        <button class="accordion-header">
+          Is BioViL a registered company or an NGO?
+          <span class="accordion-arrow">▼</span>
+        </button>
+        <div class="accordion-body">
+          BioViL is currently operating as a project under the Mercedes-Benz beVisioneers Fellowship.
+          We are in the process of formalising our entity structure. We will update this page when registration is complete.
+        </div>
+      </div>
+      <div class="accordion-item">
+        <button class="accordion-header">
+          Do you work outside of Assam?
+          <span class="accordion-arrow">▼</span>
+        </button>
+        <div class="accordion-body">
+          Our current pilot is in Assam, India. We are open to discussing expansion partnerships in
+          other rural states, please reach out through the form above and we'll explore possibilities together.
+        </div>
+      </div>
+      <div class="accordion-item">
+        <button class="accordion-header">
+          How do I know if my farm is suitable for a biodigester?
+          <span class="accordion-arrow">▼</span>
+        </button>
+        <div class="accordion-body">
+          Generally, farms with 2+ cattle (or equivalent livestock or crop waste) and a permanent water source
+          are good candidates. Contact us and we'll assess your situation for free, no commitment needed.
+        </div>
+      </div>
+      <div class="accordion-item">
+        <button class="accordion-header">
+          I'm a student or researcher. Can I collaborate?
+          <span class="accordion-arrow">▼</span>
+        </button>
+        <div class="accordion-body">
+          Absolutely. We welcome academic collaborations, field study requests, and co-research partnerships.
+          Use the form above and select "Researcher or Academic" from the dropdown.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA STRIP -->
+<section class="cta-strip cta-strip--dark">
+  <div class="container text-center">
+    <h2 class="section-title section-title--white">Ready to Start?</h2>
+    <p class="section-sub section-sub--white text-center mt-2" style="margin:1rem auto">
+      Every village we power starts with a conversation. Let's have ours.
+    </p>
+    <a href="#contact-form-section" class="btn btn-white mt-4" style="display:inline-flex">
+      Send a Message →
+    </a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer__grid">
+      <div>
+        <img src="assets/logo-light.png" alt="BioViL" class="footer__logo-img" onerror="this.outerHTML='<div style=\'font-weight:900;font-size:1.6rem;color:white;margin-bottom:1rem\'>🌿 BioViL</div>'">
+        <p class="footer__brand-text">Converting waste into clean energy, and communities into partners.</p>
+        <div class="footer__socials">
+          <a href="#" class="social-icon">in</a><a href="#" class="social-icon">&#9825;</a><a href="#" class="social-icon">✆</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer__col-title">Company</div>
+        <ul class="footer__links">
+          <li><a href="index.html">Home</a></li><li><a href="about.html">About Us</a></li>
+          <li><a href="journey.html">Our Journey</a></li>
+      <li class="nav-has-dropdown">
+        <a href="#" class="nav-link nav-link--dropdown" aria-haspopup="true" aria-expanded="false">
+          Projects <svg class="nav-dropdown-chevron" viewBox="0 0 24 24" width="12" height="12" style="margin-left:3px;vertical-align:middle;transition:transform 0.2s"><path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round"/></svg>
+        </a>
+        <ul class="nav-dropdown" role="menu">
+          <li role="none"><a href="prototype-1.html" class="nav-dropdown__item" role="menuitem">Prototype I</a></li>
+        </ul>
+      </li><li><a href="resource.html">Resource</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer__col-title">Get Involved</div>
+        <ul class="footer__links">
+          <li><a href="contact.html">For Farmers</a></li>
+          <li><a href="contact.html">For Partners</a></li>
+          <li><a href="contact.html">For Investors</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer__col-title">Contact</div>
+        <div class="footer__contact-item"><svg class="icon-svg" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg><span>Pankaj Sharma</span></div>
+        <div class="footer__contact-item"><svg class="icon-svg" viewBox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path><circle cx="12" cy="10" r="3"></circle></svg><span>Assam, India</span></div>
+        <div class="footer__contact-item"><svg class="icon-svg" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg><a href="mailto:contact@biovil.co.in" style="color:inherit;text-decoration:none;">contact@biovil.co.in</a></div>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>© 2025 BioViL. All rights reserved.</span>
+      <span>A project under the beVisioneers: The Mercedes-Benz Fellowship.</span>
+    </div>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>

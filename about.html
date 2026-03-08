@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About Us, BioViL</title>
+  <meta name="description" content="Learn about BioViL's mission, origin story, Farm-to-Business model, and the people driving clean energy in rural India." />
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    /* About-specific */
+    .farm-flow {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      margin-top: 3rem;
+    }
+    .farm-step {
+      background: var(--white);
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-md);
+      padding: 1.75rem;
+      text-align: center;
+      position: relative;
+      transition: transform var(--transition);
+    }
+    .farm-step:hover { transform: translateY(-4px); }
+    .farm-step__num {
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      background: var(--green-700);
+      color: var(--white);
+      font-weight: 800; font-size: 0.85rem;
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 1rem;
+    }
+    .farm-step__emoji { font-size: 1.75rem; margin-bottom: 0.75rem; }
+    .farm-step__title { font-size: 1rem; font-weight: 700; color: var(--grey-900); margin-bottom: 0.4rem; }
+    .farm-step__body  { font-size: 0.82rem; color: var(--grey-600); }
+    .farm-arrow {
+      position: absolute;
+      right: -1.2rem; top: 50%;
+      transform: translateY(-50%);
+      color: var(--green-300); font-size: 1.5rem; z-index: 1;
+    }
+
+    /* Founder section */
+    .founder-grid {
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+    .founder-photo {
+      width: 280px; height: 320px;
+      border-radius: var(--radius-lg);
+      object-fit: cover;
+      background: var(--green-100);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 5rem;
+      box-shadow: var(--shadow-lg);
+      border: 4px solid var(--green-100);
+    }
+    .founder-creds {
+      display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 1.25rem;
+    }
+    @media(max-width:768px){
+      .farm-flow { grid-template-columns:1fr 1fr; }
+      .founder-grid { grid-template-columns:1fr; }
+      .founder-photo { width:100%; height:240px; }
+    }
+    @media(max-width:480px){ .farm-flow { grid-template-columns:1fr; } }
+  </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+  <div class="container navbar__inner">
+    <a href="index.html" class="nav-logo">
+      <span class="nav-logo-text">🌿 BioViL</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html" class="nav-link">Home</a></li>
+      <li><a href="about.html" class="nav-link">About Us</a></li>
+      <li><a href="journey.html" class="nav-link">Our Journey</a></li>
+      <li class="nav-item-dropdown">
+        <a href="#" class="nav-link">Projects <svg class="icon-svg" viewBox="0 0 24 24" style="width:14px;height:14px;margin-left:4px"><polyline points="6 9 12 15 18 9"></polyline></svg></a>
+        <ul class="dropdown-menu">
+          <li><a href="prototype-1.html">Prototype I</a></li>
+        </ul>
+      </li>
+      <li><a href="resource.html" class="nav-link">Resource</a></li>
+    </ul>
+    <a href="contact.html" class="btn btn-primary nav-cta">Get Involved →</a>
+    <button class="nav-burger"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<!-- MOBILE NAV -->
+<div class="nav-mobile">
+  <button class="nav-mobile-close">✕</button>
+  <a href="index.html" class="nav-link">Home</a>
+  <a href="about.html" class="nav-link">About Us</a>
+  <a href="journey.html" class="nav-link">Our Journey</a>
+  <div class="nav-mobile-dropdown">
+    <span class="nav-link" style="color:var(--grey-800);display:block;margin-bottom:0.5rem">Projects ▾</span>
+    <div class="nav-mobile-dropdown-content" style="border-left:2px solid var(--grey-200);margin-left:1rem;display:flex;flex-direction:column;gap:0.5rem">
+      <a href="prototype-1.html" class="nav-link" style="padding-left:1rem;font-size:1rem">Prototype I</a>
+    </div>
+  </div>
+  <a href="resource.html" class="nav-link">Resource</a>
+  <a href="contact.html" class="btn btn-primary" style="margin-top:1rem">Get Involved →</a>
+</div>
+
+<!-- HERO -->
+<section class="hero-inner">
+  <div class="hero-inner__bg" style="background-image:url('https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=1920&q=80');background-position:center 70%"></div>
+  <div class="hero-inner__overlay"></div>
+  <div class="container">
+    <div class="hero-inner__content">
+      <span class="section-label section-label--white">Our Story</span>
+      <h1 class="section-title section-title--white mt-2" style="font-size:clamp(2.5rem,5vw,4rem)">
+        Built From the Ground Up.<br><em style="color:#a5d6a7;font-style:normal">Literally.</em>
+      </h1>
+      <p class="section-sub section-sub--white mt-3">
+        BioViL was born not in a boardroom, but in the forests and farms of Assam, from a question that wouldn't go away:
+        <em>"Why plant trees when we already have plenty around us?"</em>
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ORIGIN STORY -->
+<section class="section">
+  <div class="container" style="max-width:820px">
+    <span class="section-label">The Idea</span>
+    <h2 class="section-title">A Problem Hiding in Plain Sight.</h2>
+    <p class="section-sub mt-3" style="max-width:100%;color:var(--grey-700)">
+      The forests around many Indian villages are shrinking, not because people don't care,
+      but because they have no alternative. Firewood is free. It's available. And it's what
+      three generations have always used.
+    </p>
+    <p class="section-sub mt-2" style="max-width:100%;color:var(--grey-700)">
+      BioViL's founder, working in Assam's rural heartlands, asked a different question:
+      what if the waste already on every farm, the cow dung, the crop residue,
+      could replace that firewood entirely? The answer was biogas. The mission became BioViL.
+    </p>
+    <blockquote class="pull-quote mt-4">
+      ❝ BioViL emerged from a practical insight: turning waste into a resource
+      could address energy poverty and deforestation, at the same time. ❞
+    </blockquote>
+  </div>
+</section>
+
+<!-- MISSION / VISION MIGRATED TO HOMEPAGE -->
+
+<!-- WHAT WE FOCUS ON -->
+<section class="section" style="background:var(--grey-50)">
+  <div class="container">
+    <span class="section-label">What We Focus On</span>
+    <h2 class="section-title">How We Make It Stick.</h2>
+    <p class="section-sub">Three pillars. One goal: lasting energy independence for rural communities.</p>
+    <div class="card-grid mt-6">
+      <div class="card reveal">
+        <div class="card-icon">
+          <svg class="icon-svg icon-svg--xl" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+        </div>
+        <h3 class="card__title">Community Engagement</h3>
+        <p class="card__body">
+          We go to the village. We hold trainings and workshops, run youth programs, not to tell
+          communities what they need, but to learn alongside them. Biogas only works when people
+          believe in it and own it.
+        </p>
+      </div>
+      <div class="card reveal reveal-delay-1">
+        <div class="card-icon card-icon--blue">
+          <svg class="icon-svg icon-svg--xl" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+        </div>
+        <h3 class="card__title">Technology With Purpose</h3>
+        <p class="card__body">
+          We build simple, user-friendly monitoring tools that give farmers real-time feedback
+          on their biodigester, because data shouldn't be just for engineers.
+          Our tech evolves based on what farmers actually tell us they need.
+        </p>
+      </div>
+      <div class="card reveal reveal-delay-2">
+        <div class="card-icon">
+          <svg class="icon-svg icon-svg--xl" viewBox="0 0 24 24"><path d="M2 12A10 10 0 0 0 15 21.54A10 10 0 0 1 15 2.46A10 10 0 0 0 2 12Z"></path><path d="M12 2v20"></path><path d="m3 9 18-4"></path><path d="m3 15 18 4"></path></svg>
+        </div>
+        <h3 class="card__title">Iterative Prototyping</h3>
+        <p class="card__body">
+          We tested. We failed. We learned. Our first monitoring prototype failed because farmers
+          needed automation, not manual charts, so we redesigned it. BioViL is built on honest
+          iteration, not perfect plans.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FARM TO BUSINESS -->
+<section class="section">
+  <div class="container">
+    <span class="section-label">Our Model</span>
+    <h2 class="section-title">From Farm to Ecosystem.<br><span style="color:var(--green-700)">From Waste to Wealth.</span></h2>
+    <p class="section-sub mt-2">
+      BioViL isn't just an energy provider. It's a cooperative business model where farmers are co-owners, not customers.
+    </p>
+    <div class="farm-flow mt-6 reveal">
+      <div class="farm-step" style="position:relative">
+        <div class="farm-step__emoji"><svg class="icon-svg icon-svg--xl" viewBox="0 0 24 24"><path d="M12 22v-6M12 16L7.5 10M12 16l4.5-6M12 2L4 12h16L12 2z"></path></svg></div>
+        <div class="farm-step__num">1</div>
+        <div class="farm-step__title">Farm Waste</div>
+        <div class="farm-step__body">We collect crop stubble, animal dung, kitchen scraps, material once a burden</div>
+        <span class="farm-arrow">›</span>
+      </div>
+      <div class="farm-step" style="position:relative">
+        <div class="farm-step__emoji"><svg class="icon-svg icon-svg--xl" viewBox="0 0 24 24"><path d="M9 22h6v-6h-6v6z"></path><path d="M12 2v20"></path><path d="M5 12h14"></path></svg></div>
+        <div class="farm-step__num">2</div>
+        <div class="farm-step__title">Biogas Digester</div>
+        <div class="farm-step__body">Anaerobic digestion over 15–30 days converts waste into clean biogas</div>
+        <span class="farm-arrow">›</span>
+      </div>
+      <div class="farm-step">
+        <div class="farm-step__emoji"><svg class="icon-svg icon-svg--xl" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg></div>
+        <div class="farm-step__num">3</div>
+        <div class="farm-step__title">Energy for Farms</div>
+        <div class="farm-step__body">Clean cooking fuel and electricity flow to the farmer's home, cutting costs</div>
+      </div>
+      <div class="farm-step" style="position:relative">
+        <div class="farm-step__emoji"><svg class="icon-svg icon-svg--xl" viewBox="0 0 24 24"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg></div>
+        <div class="farm-step__num">4</div>
+        <div class="farm-step__title">Surplus Energy Sold</div>
+        <div class="farm-step__body">Excess biogas sold to neighbours or local mini-grids, generating revenue</div>
+        <span class="farm-arrow">›</span>
+      </div>
+      <div class="farm-step" style="position:relative">
+        <div class="farm-step__emoji"><svg class="icon-svg icon-svg--xl" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg></div>
+        <div class="farm-step__num">5</div>
+        <div class="farm-step__title">Shared Revenue</div>
+        <div class="farm-step__body">Farmers become co-owners, earning a share of all revenue generated</div>
+        <span class="farm-arrow">›</span>
+      </div>
+      <div class="farm-step">
+        <div class="farm-step__emoji"><svg class="icon-svg icon-svg--xl" viewBox="0 0 24 24"><path d="M12 22c4-4.5 7-9 7-12a7 7 0 0 0-14 0c0 3 3 7.5 7 12z"></path><path d="M12 10v4"></path></svg></div>
+        <div class="farm-step__num">6</div>
+        <div class="farm-step__title">Reinvestment</div>
+        <div class="farm-step__body">Revenue expands the system, trains new communities, funds the next digester</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOUNDER (placeholder for real photo/bio) -->
+<section class="section">
+  <div class="container">
+    <span class="section-label">The Person Behind BioViL</span>
+    <div class="founder-grid mt-4 reveal">
+      <div>
+        <div class="founder-photo" aria-label="Founder photo: Pankaj Sharma"><svg class="icon-svg icon-svg--xl" viewBox="0 0 24 24" style="color:var(--green-700);width:100px;height:100px"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg></div>
+        <div class="founder-creds">
+          <span class="tag"><svg class="icon-svg" viewBox="0 0 24 24" style="margin-right:2px"><path d="M6 9H4.5a2.5 2.5 0 0 1-2.5-2.5v0A2.5 2.5 0 0 1 4.5 4H6m12 5h1.5a2.5 2.5 0 0 0 2.5-2.5v0A2.5 2.5 0 0 0 19.5 4H18m-6 10v7m-3-3h6M8 4h8v5.5a4 4 0 0 1-4 4v0a4 4 0 0 1-4-4V4z"></path></svg> beVisioneers Fellow 2024</span>
+          <span class="tag"><svg class="icon-svg" viewBox="0 0 24 24" style="margin-right:2px"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path><circle cx="12" cy="10" r="3"></circle></svg> Stralsund, Germany</span>
+        </div>
+      </div>
+      <div>
+        <h2 class="section-title" style="font-size:2rem">Pankaj Sharma</h2>
+        <div style="display:flex;align-items:center;gap:10px;margin:.25rem 0 1.25rem">
+          <div style="color:var(--green-700);font-weight:600;">Founder, BioViL</div>
+          <a href="https://www.linkedin.com/in/pankajregmy/" target="_blank" rel="noopener noreferrer" style="color:var(--blue-700);display:inline-flex;align-items:center;gap:4px;font-size:0.85rem;font-weight:600;text-decoration:none;padding:4px 10px;border-radius:20px;background:var(--blue-50);border:1px solid var(--blue-100)">
+            <svg class="icon-svg" viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg> LinkedIn
+          </a>
+        </div>
+        <p style="color:var(--grey-700);line-height:1.8;margin-bottom:1rem">
+          Pankaj is a clean energy specialist bridging technical energy modeling with grassroots impact. 
+          Holding a Master's in Renewable Energy and E-Mobility from Hochschule Stralsund and an Electrical Engineering
+          degree from NERIST, India, his technical expertise spans hydrogen ecosystems, microgrid analysis, and bio-energy systems.
+        </p>
+        <p style="color:var(--grey-700);line-height:1.8;margin-bottom:1.5rem">
+          Currently serving as a Manager at envyze GmbH in Germany and a Fellow with the global Mercedes-Benz beVisioneers program, 
+          Pankaj is spearheading the BioViL project in Assam. His work focuses on converting agricultural waste into sustainable 
+          power, empowering local communities to lead their own energy transitions.
+        </p>
+        <blockquote style="font-style:italic;color:var(--green-700);border-left:3px solid var(--green-300);padding-left:1rem;font-size:1.05rem">
+          "I didn't start BioViL because it was a good idea. I started it because it was the only idea that made sense."
+        </blockquote>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA STRIP -->
+<section class="cta-strip">
+  <div class="container text-center">
+    <h2 class="section-title section-title--white">"Our model is more than energy.<br>It's economic sovereignty for rural India."</h2>
+    <p class="section-sub section-sub--white text-center mt-3" style="margin:1rem auto">
+      We started with one farmer in Assam, one prototype, and one conviction: that every village deserves to own its energy future.
+    </p>
+    <div class="btn-group mt-6" style="justify-content:center">
+      <a href="contact.html?type=farmer"  class="btn btn-white">Join as a Farmer →</a>
+      <a href="contact.html?type=partner" class="btn btn-outline">Become a Partner →</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer__grid">
+      <div>
+        <img src="assets/logo-light.png" alt="BioViL" class="footer__logo-img" onerror="this.outerHTML='<div style=\'font-weight:900;font-size:1.6rem;color:white;margin-bottom:1rem\'>🌿 BioViL</div>'">
+        <p class="footer__brand-text">Converting waste into clean energy, and communities into partners. A beVisioneers Fellowship Initiative.</p>
+        <div class="footer__socials">
+          <a href="#" class="social-icon">in</a>
+          <a href="#" class="social-icon">&#9825;</a>
+          <a href="#" class="social-icon">✆</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer__col-title">Company</div>
+        <ul class="footer__links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="journey.html">Our Journey</a></li>
+      <li class="nav-has-dropdown">
+        <a href="#" class="nav-link nav-link--dropdown" aria-haspopup="true" aria-expanded="false">
+          Projects <svg class="nav-dropdown-chevron" viewBox="0 0 24 24" width="12" height="12" style="margin-left:3px;vertical-align:middle;transition:transform 0.2s"><path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round"/></svg>
+        </a>
+        <ul class="nav-dropdown" role="menu">
+          <li role="none"><a href="prototype-1.html" class="nav-dropdown__item" role="menuitem">Prototype I</a></li>
+        </ul>
+      </li>
+          <li><a href="resource.html">Resource</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer__col-title">Get Involved</div>
+        <ul class="footer__links">
+          <li><a href="contact.html?type=farmer">For Farmers</a></li>
+          <li><a href="contact.html?type=partner">For Partners</a></li>
+          <li><a href="contact.html?type=investor">For Investors</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer__col-title">Contact</div>
+        <div class="footer__contact-item"><svg class="icon-svg" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg><span>Pankaj Sharma</span></div>
+        <div class="footer__contact-item"><svg class="icon-svg" viewBox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path><circle cx="12" cy="10" r="3"></circle></svg><span>Assam, India</span></div>
+        <div class="footer__contact-item"><svg class="icon-svg" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg><a href="mailto:contact@biovil.co.in" style="color:inherit;text-decoration:none;">contact@biovil.co.in</a></div>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>© 2025 BioViL. All rights reserved.</span>
+      <span>A project under the beVisioneers: The Mercedes-Benz Fellowship.</span>
+    </div>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>

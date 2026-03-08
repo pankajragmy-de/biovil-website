@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Prototype I, Case Study, BioViL</title>
+  <meta name="description"
+    content="Engineering Autonomy in Assam, the story behind BioViL's first working fixed-dome biodigester." />
+
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    /* Specific styles for Prototype 1 Case Study */
+    .case-hero {
+      position: relative;
+      height: 90vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--white);
+      text-align: center;
+      background: url('https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=1920&q=80') center/cover no-repeat;
+    }
+
+    .case-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, rgba(13, 43, 29, 0.4), rgba(13, 43, 29, 0.95));
+      z-index: 1;
+    }
+
+    .case-hero__content {
+      position: relative;
+      z-index: 2;
+      animation: fadeUp 1s ease forwards;
+    }
+
+    .case-hero__eyebrow {
+      font-size: 1rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--green-300);
+      margin-bottom: 1.5rem;
+    }
+
+    .case-hero__title {
+      font-size: clamp(3rem, 6vw, 6.5rem);
+      font-weight: 800;
+      line-height: 1.1;
+      margin-bottom: 1.5rem;
+      letter-spacing: -0.02em;
+    }
+
+    .case-hero__scroll {
+      position: absolute;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 2;
+      animation: bounce 2s infinite;
+      color: var(--white);
+    }
+
+    @keyframes bounce {
+
+      0%,
+      20%,
+      50%,
+      80%,
+      100% {
+        transform: translateY(0) translateX(-50%);
+      }
+
+      40% {
+        transform: translateY(-20px) translateX(-50%);
+      }
+
+      60% {
+        transform: translateY(-10px) translateX(-50%);
+      }
+    }
+
+    .case-blueprint {
+      background: var(--dark-forest);
+      color: var(--green-50);
+      padding: 3rem 0;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .blueprint-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 2rem;
+      font-family: monospace;
+    }
+
+    .blueprint-item {
+      border-left: 2px solid var(--green-500);
+      padding-left: 1rem;
+    }
+
+    .blueprint-label {
+      font-size: 0.8rem;
+      color: var(--green-300);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 0.5rem;
+    }
+
+    .blueprint-value {
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: var(--white);
+    }
+
+    .case-narrative {
+      padding: var(--section-padding);
+      background: var(--white);
+    }
+
+    .narrative-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 4rem;
+    }
+
+    @media (min-width: 992px) {
+      .narrative-grid {
+        grid-template-columns: 3fr 2fr;
+        gap: 6rem;
+      }
+    }
+
+    .narrative-content {
+      font-size: 1.15rem;
+      line-height: 1.8;
+      color: var(--grey-800);
+    }
+
+    .narrative-content p {
+      margin-bottom: 2rem;
+    }
+
+    .narrative-content p.lead {
+      font-size: 1.5rem;
+      color: var(--dark-forest);
+      font-weight: 500;
+      line-height: 1.6;
+    }
+
+    .narrative-content h2 {
+      font-size: 2.5rem;
+      margin: 4rem 0 1.5rem;
+      color: var(--dark-forest);
+    }
+
+    .narrative-sidebar {
+      position: sticky;
+      top: 120px;
+      height: max-content;
+    }
+
+    .pull-quote {
+      font-size: 1.75rem;
+      font-weight: 300;
+      font-style: italic;
+      color: var(--green-700);
+      line-height: 1.4;
+      border-left: 4px solid var(--green-300);
+      padding-left: 1.5rem;
+    }
+
+    /* Native Horizontal Gallery styles */
+    .case-gallery-wrapper {
+      background: var(--grey-900);
+      position: relative;
+    }
+
+    .case-gallery {
+      display: flex;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scrollbar-width: none;
+      /* Firefox */
+      -ms-overflow-style: none;
+      /* IE */
+    }
+
+    .case-gallery::-webkit-scrollbar {
+      display: none;
+      /* Safari/Chrome */
+    }
+
+    .gallery-panel {
+      width: 100vw;
+      height: 100vh;
+      position: relative;
+      flex-shrink: 0;
+      scroll-snap-align: center;
+    }
+
+    .gallery-panel img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.6;
+      transition: opacity 0.5s ease;
+    }
+
+    .gallery-panel:hover img {
+      opacity: 0.8;
+    }
+
+    .gallery-nav-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(13, 43, 29, 0.6);
+      color: var(--white);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 10;
+      transition: all 0.3s ease;
+      backdrop-filter: blur(4px);
+    }
+
+    .gallery-nav-btn:hover {
+      background: rgba(13, 43, 29, 0.95);
+      transform: translateY(-50%) scale(1.1);
+      border-color: var(--green-500);
+    }
+
+    .gallery-nav-btn--prev {
+      left: 2rem;
+    }
+
+    .gallery-nav-btn--next {
+      right: 2rem;
+    }
+
+    .gallery-nav-btn svg {
+      width: 24px;
+      height: 24px;
+      stroke: currentColor;
+      stroke-width: 2;
+      fill: none;
+    }
+
+    .gallery-panel:hover img {
+      opacity: 0.8;
+    }
+
+    .gallery-panel__caption {
+      position: absolute;
+      bottom: 4rem;
+      left: 4rem;
+      color: var(--white);
+      max-width: 500px;
+      z-index: 2;
+    }
+
+    .gallery-panel__step {
+      font-family: monospace;
+      color: var(--green-300);
+      font-size: 1.2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .gallery-panel__title {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      text-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+    }
+
+    .gallery-panel__desc {
+      font-size: 1.1rem;
+      line-height: 1.6;
+      color: var(--grey-100);
+      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+    }
+
+    /* Hotspot component */
+    .case-hotspots {
+      padding: var(--section-padding);
+      background: var(--grey-50);
+      text-align: center;
+    }
+
+    .hotspots-container {
+      position: relative;
+      max-width: 1000px;
+      margin: 4rem auto 0;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-xl);
+      background: var(--white);
+    }
+
+    .hotspots-container img {
+      width: 100%;
+      display: block;
+    }
+
+    .hotspot {
+      position: absolute;
+      width: 28px;
+      height: 28px;
+      background: var(--green-500);
+      border: 3px solid var(--white);
+      border-radius: 50%;
+      cursor: pointer;
+      transform: translate(-50%, -50%);
+      box-shadow: 0 0 0 0 rgba(27, 85, 32, 0.7);
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      70% {
+        box-shadow: 0 0 0 15px rgba(27, 85, 32, 0);
+      }
+
+      100% {
+        box-shadow: 0 0 0 0 rgba(27, 85, 32, 0);
+      }
+    }
+
+    .hotspot-tooltip {
+      position: absolute;
+      bottom: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(13, 43, 29, 0.95);
+      backdrop-filter: blur(8px);
+      color: var(--white);
+      padding: 1rem 1.5rem;
+      border-radius: var(--radius-md);
+      font-size: 0.95rem;
+      width: 280px;
+      text-align: left;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      pointer-events: none;
+      z-index: 10;
+    }
+
+    .hotspot-tooltip strong {
+      display: block;
+      color: var(--green-300);
+      margin-bottom: 0.25rem;
+      font-size: 1.1rem;
+    }
+
+    .hotspot:hover .hotspot-tooltip {
+      opacity: 1;
+      visibility: visible;
+      bottom: 50px;
+    }
+
+    .case-next {
+      height: 60vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--dark-forest);
+      color: var(--white);
+      text-align: center;
+      text-decoration: none;
+      transition: background 0.4s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .case-next::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: url('https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?w=1920&q=80') center/cover no-repeat;
+      opacity: 0.1;
+      transition: opacity 0.4s ease;
+    }
+
+    .case-next:hover::before {
+      opacity: 0.3;
+    }
+
+    .case-next__text {
+      position: relative;
+      z-index: 2;
+      font-size: clamp(2rem, 5vw, 5rem);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+
+    .case-next__subtitle {
+      position: relative;
+      z-index: 2;
+      font-size: 1.25rem;
+      color: var(--green-300);
+      margin-bottom: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ═══════════════════════════════════ NAVBAR ═══════════════════ -->
+  <nav class="navbar" aria-label="Main navigation">
+    <div class="container navbar__inner">
+      <a href="index.html" class="nav-logo" aria-label="BioViL Home">
+        <span class="nav-logo-text">🌿 BioViL</span>
+      </a>
+      <ul class="nav-links" role="list">
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="about.html" class="nav-link">About Us</a></li>
+        <li><a href="journey.html" class="nav-link">Our Journey</a></li>
+        <li class="nav-item-dropdown">
+          <a href="#" class="nav-link active">Projects <svg class="icon-svg" viewBox="0 0 24 24"
+              style="width:14px;height:14px;margin-left:4px">
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg></a>
+          <ul class="dropdown-menu">
+            <li><a href="prototype-1.html">Prototype I</a></li>
+          </ul>
+        </li>
+        <li><a href="resource.html" class="nav-link">Resource</a></li>
+      </ul>
+      <a href="contact.html" class="btn btn-primary nav-cta">Get Involved →</a>
+      <button class="nav-burger" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Mobile menu -->
+  <div class="nav-mobile" role="dialog" aria-label="Mobile navigation">
+    <button class="nav-mobile-close" aria-label="Close menu">✕</button>
+    <a href="index.html" class="nav-link">Home</a>
+    <a href="about.html" class="nav-link">About Us</a>
+    <a href="journey.html" class="nav-link">Our Journey</a>
+    <div class="nav-mobile-dropdown">
+      <span class="nav-link" style="color:var(--grey-800);display:block;margin-bottom:0.5rem">Projects ▾</span>
+      <div class="nav-mobile-dropdown-content"
+        style="border-left:2px solid var(--grey-200);margin-left:1rem;display:flex;flex-direction:column;gap:0.5rem">
+        <a href="prototype-1.html" class="nav-link active" style="padding-left:1rem;font-size:1rem">Prototype I</a>
+      </div>
+    </div>
+    <a href="resource.html" class="nav-link">Resource</a>
+    <a href="contact.html" class="btn btn-primary" style="margin-top:1rem">Get Involved →</a>
+  </div>
+
+  <!-- ═══════════════════════════════════ HERO ════════════════════ -->
+  <section class="case-hero">
+    <div class="container">
+      <div class="case-hero__content">
+        <div class="case-hero__eyebrow">Prototype I</div>
+        <h1 class="case-hero__title">Engineering Autonomy<br>in Assam</h1>
+      </div>
+    </div>
+    <svg class="case-hero__scroll icon-svg" width="32" height="32" viewBox="0 0 24 24">
+      <path d="m6 9 6 6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+        stroke-linejoin="round" />
+    </svg>
+  </section>
+
+  <!-- ═══════════════════════════════════ METADATA ═══════════════════ -->
+  <section class="case-blueprint">
+    <div class="container">
+      <div class="blueprint-grid">
+        <div class="blueprint-item">
+          <div class="blueprint-label">Location</div>
+          <div class="blueprint-value">Kamrup, Assam</div>
+        </div>
+        <div class="blueprint-item">
+          <div class="blueprint-label">System Type</div>
+          <div class="blueprint-value">Fixed-Dome</div>
+        </div>
+        <div class="blueprint-item">
+          <div class="blueprint-label">Capacity</div>
+          <div class="blueprint-value">4 Cubic Meters</div>
+        </div>
+        <div class="blueprint-item">
+          <div class="blueprint-label">Completed</div>
+          <div class="blueprint-value">Oct 2025</div>
+        </div>
+        <div class="blueprint-item">
+          <div class="blueprint-label">Impact</div>
+          <div class="blueprint-value">2 Households</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════ NARRATIVE ═══════════════════ -->
+  <section class="case-narrative">
+    <div class="container">
+      <div class="narrative-grid">
+        <div class="narrative-content">
+          <p class="lead">Built on the principles of open knowledge and rural empowerment, Prototype I represents
+            BioViL's inaugural step into tangible engineering. It proves that energy autonomy isn't a luxury reserved
+            for cities, but a basic right that can be built from the ground up.</p>
+
+          <h2>The Challenge</h2>
+          <p>In rural Assam, energy dependency is a dual crisis. Families spend significant income on commercial LPG
+            cylinders, while simultaneously burning firewood that contributes to severe indoor air pollution and local
+            deforestation. Agricultural waste, abundant on every farm, was being discarded or burned in fields.</p>
+          <p>The engineering challenge wasn't just to build a biodigester. The challenge was to build a system that was
+            financially accessible, socially acceptable, and robust enough to operate without continuous expert
+            maintenance.</p>
+
+          <h2>The Build Process</h2>
+          <p>We selected a fixed-dome architecture for its durability and lack of moving parts. Working alongside local
+            masons, we excavated a pit to host the 4m³ underground digestion chamber. This chamber, constructed with
+            brick and cement, serves as the anaerobic reactor where methanogenic bacteria break down the organic inputs.
+          </p>
+          <p>The design utilizes natural gas pressure. As biogas is generated, it accumulates in the sealed dome,
+            creating pressure that displaces the digested slurry into an expansion chamber. This pressure automatically
+            drives the gas through pipes directly to the household kitchen.</p>
+
+          <h2>The Result</h2>
+          <p>Today, Prototype I consumes cow dung and crop residue daily. In return, it provides a completely clean,
+            smoke-free flame for cooking, eliminating reliance on firewood. Furthermore, the byproduct is a
+            nutrient-dense liquid fertilizer that the partner farmers now use to enrich their soil, closing the loop on
+            agricultural waste.</p>
+        </div>
+
+        <div class="narrative-sidebar">
+          <div class="pull-quote">
+            "We aren't just building a concrete dome. We are engineering a mechanism that turns waste into
+            <strong>reliable</strong>, <strong>affordable</strong> and <strong>clean</strong> energy."
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════ NATIVE HORIZONTAL GALLERY ═══════════════════ -->
+  <div class="case-gallery-wrapper" id="gallery-wrapper">
+
+    <!-- Navigation Arrows -->
+    <button class="gallery-nav-btn gallery-nav-btn--prev" id="gallery-prev" aria-label="Previous image">
+      <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="15 18 9 12 15 6"></polyline>
+      </svg>
+    </button>
+    <button class="gallery-nav-btn gallery-nav-btn--next" id="gallery-next" aria-label="Next image">
+      <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="9 18 15 12 9 6"></polyline>
+      </svg>
+    </button>
+
+    <div class="case-gallery" id="gallery-container">
+
+      <!-- Panel 1 -->
+      <div class="gallery-panel">
+        <img src="https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=1920&q=80" alt="Excavation">
+        <div class="gallery-panel__caption">
+          <div class="gallery-panel__step">01. Excavation</div>
+          <h3 class="gallery-panel__title">Breaking Ground</h3>
+          <p class="gallery-panel__desc">The foundation of the 4m³ fixed-dome reactor begins with precision excavation,
+            ensuring optimal thermodynamics for the underground chamber.</p>
+        </div>
+      </div>
+
+      <!-- Panel 2 -->
+      <div class="gallery-panel">
+        <img src="https://images.unsplash.com/photo-1531206715517-5c0ba140b2b8?w=1920&q=80" alt="Brickwork">
+        <div class="gallery-panel__caption">
+          <div class="gallery-panel__step">02. Masonry</div>
+          <h3 class="gallery-panel__title">The Reactor Dome</h3>
+          <p class="gallery-panel__desc">Local masons construct the sealed brick dome. Inside this chamber, billions of
+            anaerobic bacteria will convert organic waste into methane gas.</p>
+        </div>
+      </div>
+
+      <!-- Panel 3 -->
+      <div class="gallery-panel">
+        <img src="https://images.unsplash.com/photo-1605000797499-95a51c5269ae?w=1920&q=80" alt="Piping">
+        <div class="gallery-panel__caption">
+          <div class="gallery-panel__step">03. Pipeline</div>
+          <h3 class="gallery-panel__title">Gas Distribution</h3>
+          <p class="gallery-panel__desc">Pipes are laid from the dome directly to the kitchen. The system relies
+            entirely on natural gas pressure, requiring zero electrical pumps.</p>
+        </div>
+      </div>
+
+      <!-- Panel 4 -->
+      <div class="gallery-panel">
+        <img src="https://images.unsplash.com/photo-1466611653911-95081537e5b7?w=1920&q=80" alt="Cooking Flame">
+        <div class="gallery-panel__caption">
+          <div class="gallery-panel__step">04. The Result</div>
+          <h3 class="gallery-panel__title">Clean Energy</h3>
+          <p class="gallery-panel__desc">A clean, blue flame. Replacing smoky firewood and expensive LPG cylinders with
+            100% renewable, locally generated biogas.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+
+
+
+  <div style="padding: 2rem 0; background: var(--grey-50);"></div>
+
+  <!-- ═══════════════════════════════════ NEXT PROJECT ═══════════════════ -->
+  <a href="resource.html" class="case-next">
+    <div>
+      <div class="case-next__subtitle">Explore the Data</div>
+      <div class="case-next__text">Read The Findings →</div>
+    </div>
+  </a>
+
+  <!-- ═══════════════════════════════════ FOOTER ════════════════════ -->
+  <footer class="footer" aria-label="Site Footer">
+    <div class="container">
+      <div class="footer__grid">
+        <div>
+          <img src="assets/logo-light.png" alt="BioViL" class="footer__logo-img"
+            onerror="this.outerHTML='<div style=\'font-weight:900;font-size:1.6rem;color:white;margin-bottom:1rem\'>🌿 BioViL</div>'">
+          <p class="footer__brand-text">
+            Converting waste into clean energy, and communities into partners.
+            A beVisioneers Fellowship Initiative.
+          </p>
+          <div class="footer__socials">
+            <a href="#" class="social-icon" aria-label="LinkedIn">in</a>
+            <a href="#" class="social-icon" aria-label="Instagram">&#9825;</a>
+            <a href="#" class="social-icon" aria-label="WhatsApp">✆</a>
+          </div>
+        </div>
+        <div>
+          <div class="footer__col-title">Company</div>
+          <ul class="footer__links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="journey.html">Our Journey</a></li>
+            <li><a href="prototype-1.html">Projects</a></li>
+            <li><a href="resource.html">Resource</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer__col-title">Get Involved</div>
+          <ul class="footer__links">
+            <li><a href="contact.html?type=farmer">For Farmers</a></li>
+            <li><a href="contact.html?type=partner">For Partners</a></li>
+            <li><a href="contact.html?type=investor">For Investors</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer__col-title">Contact</div>
+          <div class="footer__contact-item"><svg class="icon-svg" viewBox="0 0 24 24">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+              <circle cx="12" cy="7" r="4"></circle>
+            </svg><span>Pankaj Sharma</span></div>
+          <div class="footer__contact-item"><svg class="icon-svg" viewBox="0 0 24 24">
+              <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path>
+              <circle cx="12" cy="10" r="3"></circle>
+            </svg><span>Assam, India</span></div>
+          <div class="footer__contact-item"><svg class="icon-svg" viewBox="0 0 24 24">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+              <polyline points="22,6 12,13 2,6"></polyline>
+            </svg><a href="mailto:contact@biovil.co.in"
+              style="color:inherit;text-decoration:none;">contact@biovil.co.in</a></div>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <span>© 2025 BioViL. All rights reserved.</span>
+        <span>A project under the beVisioneers: The Mercedes-Benz Fellowship.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Native Horizontal Gallery Nav Logic
+    const galleryContainer = document.getElementById("gallery-container");
+    const prevBtn = document.getElementById("gallery-prev");
+    const nextBtn = document.getElementById("gallery-next");
+
+    if (galleryContainer && prevBtn && nextBtn) {
+      prevBtn.addEventListener('click', () => {
+        const scrollAmount = window.innerWidth;
+        galleryContainer.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+      });
+
+      nextBtn.addEventListener('click', () => {
+        const scrollAmount = window.innerWidth;
+        galleryContainer.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+      });
+    }
+  </script>
+  <script src="js/main.js"></script>
+</body>
+
+</html>

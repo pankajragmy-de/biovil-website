@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Resource, BioViL</title>
+  <meta name="description" content="Explore BioViL's knowledge centre, how the biodigester works, our Iceberg Model findings, and unfiltered prototyping learnings." />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+  <div class="container navbar__inner">
+    <a href="index.html" class="nav-logo">
+      <span class="nav-logo-text">🌿 BioViL</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html" class="nav-link">Home</a></li>
+      <li><a href="about.html" class="nav-link">About Us</a></li>
+      <li><a href="journey.html" class="nav-link">Our Journey</a></li>
+      <li class="nav-item-dropdown">
+        <a href="#" class="nav-link">Projects <svg class="icon-svg" viewBox="0 0 24 24" style="width:14px;height:14px;margin-left:4px"><polyline points="6 9 12 15 18 9"></polyline></svg></a>
+        <ul class="dropdown-menu">
+          <li><a href="prototype-1.html">Prototype I</a></li>
+        </ul>
+      </li>
+      <li><a href="resource.html" class="nav-link">Resource</a></li>
+    </ul>
+    <a href="contact.html" class="btn btn-primary nav-cta">Get Involved →</a>
+    <button class="nav-burger"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<!-- MOBILE NAV -->
+<div class="nav-mobile">
+  <button class="nav-mobile-close">✕</button>
+  <a href="index.html" class="nav-link">Home</a>
+  <a href="about.html" class="nav-link">About Us</a>
+  <a href="journey.html" class="nav-link">Our Journey</a>
+  <div class="nav-mobile-dropdown">
+    <span class="nav-link" style="color:var(--grey-800);display:block;margin-bottom:0.5rem">Projects ▾</span>
+    <div class="nav-mobile-dropdown-content" style="border-left:2px solid var(--grey-200);margin-left:1rem;display:flex;flex-direction:column;gap:0.5rem">
+      <a href="prototype-1.html" class="nav-link" style="padding-left:1rem;font-size:1rem">Prototype I</a>
+    </div>
+  </div>
+  <a href="resource.html" class="nav-link">Resource</a>
+  <a href="contact.html" class="btn btn-primary" style="margin-top:1rem">Get Involved →</a>
+</div>
+
+<!-- HERO -->
+<section class="hero-inner">
+  <div class="hero-inner__bg" style="background-image:url('https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?w=1920&q=80');background-position:center 40%"></div>
+  <div class="hero-inner__overlay" style="background:linear-gradient(135deg,rgba(12,60,142,0.88),rgba(13,43,29,0.5))"></div>
+  <div class="container">
+    <div class="hero-inner__content">
+      <span class="section-label section-label--white">Knowledge Centre</span>
+      <h1 class="section-title section-title--white mt-2" style="font-size:clamp(2.5rem,5vw,4rem)">
+        The Science Behind<br>the Solution.
+      </h1>
+      <p class="section-sub section-sub--white mt-3">
+        Explore how BioViL's biodigester works, what we've learned from the field,
+        and the research that guides every decision we make.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- TAB NAVIGATION -->
+<div class="tab-nav" id="resource-tabs" role="tablist">
+  <div class="container" style="display:flex;align-items:stretch;padding:0 1.5rem">
+    <button class="tab-btn active" data-tab="how-it-works" role="tab"><svg class="icon-svg" viewBox="0 0 24 24" style="margin-right:6px"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path></svg> How It Works</button>
+    <button class="tab-btn" data-tab="our-findings"    role="tab"><svg class="icon-svg" viewBox="0 0 24 24" style="margin-right:6px"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg> Our Findings</button>
+  </div>
+</div>
+
+<!-- TAB 1: HOW IT WORKS -->
+<div class="tab-panel active" id="how-it-works" role="tabpanel">
+  <div class="container">
+    <span class="section-label section-label--blue">How It Works</span>
+    <h2 class="section-title">Turning Waste Into Energy,<br><span style="color:var(--blue-700)">The Science Made Simple.</span></h2>
+    <p class="section-sub mt-2">
+      Anaerobic digestion is one of nature's oldest processes. BioViL simply harnesses it at the farm level.
+    </p>
+
+    <!-- Biodigester Placeholder -->
+    <div class="reveal mt-6" style="background:var(--grey-100);border-radius:var(--radius-xl);overflow:hidden;text-align:center;">
+      <img
+        src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/27/Anaerobic_digestion_-_Biogaswerk_Kematen.JPG/1280px-Anaerobic_digestion_-_Biogaswerk_Kematen.JPG"
+        alt="Biodigester at a farm"
+        style="width:100%;max-height:420px;object-fit:cover;display:block;"
+        loading="lazy"
+      />
+      <p style="padding:1rem;font-size:0.85rem;color:var(--grey-600);font-style:italic;">A fixed-dome biodigester in operation, converting organic waste to clean energy.</p>
+    </div>
+
+    <!-- 4 Step Cards -->
+    <div class="process-flow mt-8 reveal" style="display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem;">
+
+      <div class="card" style="border-top:3px solid var(--blue-700);">
+        <div style="width:44px;height:44px;border-radius:50%;background:var(--blue-50);display:flex;align-items:center;justify-content:center;margin-bottom:1rem;">
+          <svg class="icon-svg" viewBox="0 0 24 24" style="color:var(--blue-700)"><path d="M12 22v-6M12 16L7.5 10M12 16l4.5-6M12 2L4 12h16L12 2z"></path></svg>
+        </div>
+        <div style="font-size:0.75rem;font-weight:800;letter-spacing:0.12em;color:var(--blue-700);margin-bottom:0.5rem;">STEP 01</div>
+        <h4 style="font-size:1.1rem;font-weight:800;margin-bottom:0.75rem;">Waste Goes In</h4>
+        <p style="font-size:0.9rem;color:var(--grey-700);line-height:1.6;">Farm residues, animal dung, and kitchen waste are mixed with water into a slurry and fed into the biodigester's inlet chamber.</p>
+      </div>
+
+      <div class="card" style="border-top:3px solid var(--green-700);">
+        <div style="width:44px;height:44px;border-radius:50%;background:var(--green-50);display:flex;align-items:center;justify-content:center;margin-bottom:1rem;">
+          <svg class="icon-svg" viewBox="0 0 24 24" style="color:var(--green-700)"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c-2.276 0-3.5-1.5-3.5-3s3.5-3 3.5-3-1.5 1.5-1.5 3c0 1.5 1.255 3 3.5 3s3.5 1.5 3.5 3.5-2.023 4-4.5 4c-3.5 0-4.5-3-4.5-3"></path><path d="M4.5 10c0-1.5 1-3.5 3-5M19.5 10c0-1.5-1-3.5-3-5"></path></svg>
+        </div>
+        <div style="font-size:0.75rem;font-weight:800;letter-spacing:0.12em;color:var(--green-700);margin-bottom:0.5rem;">STEP 02</div>
+        <h4 style="font-size:1.1rem;font-weight:800;margin-bottom:0.75rem;">Microbes Do the Work</h4>
+        <p style="font-size:0.9rem;color:var(--grey-700);line-height:1.6;">Billions of microorganisms break down the organic matter without oxygen, a process called anaerobic digestion, producing methane-rich biogas over 15–30 days.</p>
+      </div>
+
+      <div class="card" style="border-top:3px solid var(--blue-700);">
+        <div style="width:44px;height:44px;border-radius:50%;background:var(--blue-50);display:flex;align-items:center;justify-content:center;margin-bottom:1rem;">
+          <svg class="icon-svg" viewBox="0 0 24 24" style="color:var(--blue-700)"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+        </div>
+        <div style="font-size:0.75rem;font-weight:800;letter-spacing:0.12em;color:var(--blue-700);margin-bottom:0.5rem;">STEP 03</div>
+        <h4 style="font-size:1.1rem;font-weight:800;margin-bottom:0.75rem;">Pressure Rises</h4>
+        <p style="font-size:0.9rem;color:var(--grey-700);line-height:1.6;">Biogas rises to the top of the reactor dome, building pressure. This natural pressure differential pushes the gas out through pipes towards the household, no electricity needed.</p>
+      </div>
+
+      <div class="card" style="border-top:3px solid var(--green-700);">
+        <div style="width:44px;height:44px;border-radius:50%;background:var(--green-50);display:flex;align-items:center;justify-content:center;margin-bottom:1rem;">
+          <svg class="icon-svg" viewBox="0 0 24 24" style="color:var(--green-700)"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+        </div>
+        <div style="font-size:0.75rem;font-weight:800;letter-spacing:0.12em;color:var(--green-700);margin-bottom:0.5rem;">STEP 04</div>
+        <h4 style="font-size:1.1rem;font-weight:800;margin-bottom:0.75rem;">Clean Energy Delivered</h4>
+        <p style="font-size:0.9rem;color:var(--grey-700);line-height:1.6;">Gas flows directly to the farmer's kitchen for clean, smoke-free cooking. No moving parts, no maintenance beyond feeding the inlet. Just physics.</p>
+      </div>
+
+    </div>
+
+    <!-- Digestate Info Box -->
+    <div class="info-box reveal mt-6">
+      <div class="info-box__title">🌱 The Overlooked Byproduct</div>
+      <p class="info-box__body">The digestion process also produces <strong>digestate</strong>, a liquid fertilizer far richer in nitrogen and phosphorus than raw manure. BioViL farmers apply it directly to their fields, cutting chemical fertilizer costs while improving soil health.</p>
+    </div>
+
+  </div><!-- end .container -->
+</div><!-- end tab-panel#how-it-works -->
+
+<!-- TAB 2: OUR FINDINGS -->
+<div class="tab-panel" id="our-findings" role="tabpanel">
+  <div class="container">
+    <span class="section-label">Our Findings</span>
+    <h2 class="section-title">What the Field Taught Us.</h2>
+    <p class="section-sub mt-2">
+      BioViL's findings are rooted in direct community engagement across villages in Assam, India.
+      Here is the evidence that shapes every decision we make.
+    </p>
+
+
+    <!-- Key Stats -->
+    <div class="card-grid mt-6 reveal" style="grid-template-columns: repeat(4,1fr);">
+      <div style="background:var(--green-50);border-radius:var(--radius-xl);padding:2rem;text-align:center">
+        <div style="font-size:2.8rem;font-weight:900;color:var(--green-700)">4</div>
+        <div style="font-size:0.875rem;color:var(--grey-600);margin-top:0.5rem;font-weight:600;letter-spacing:0.05em">Villages Surveyed</div>
+      </div>
+      <div style="background:var(--blue-50);border-radius:var(--radius-xl);padding:2rem;text-align:center">
+        <div style="font-size:2.8rem;font-weight:900;color:var(--blue-700)">1</div>
+        <div style="font-size:0.875rem;color:var(--grey-600);margin-top:0.5rem;font-weight:600;letter-spacing:0.05em">Biodigester Completed</div>
+      </div>
+      <div style="background:var(--green-50);border-radius:var(--radius-xl);padding:2rem;text-align:center">
+        <div style="font-size:2.8rem;font-weight:900;color:var(--green-700)">73%</div>
+        <div style="font-size:0.875rem;color:var(--grey-600);margin-top:0.5rem;font-weight:600;letter-spacing:0.05em">Households use firewood daily</div>
+      </div>
+      <div style="background:var(--blue-50);border-radius:var(--radius-xl);padding:2rem;text-align:center">
+        <div style="font-size:2.8rem;font-weight:900;color:var(--blue-700)">100%</div>
+        <div style="font-size:0.875rem;color:var(--grey-600);margin-top:0.5rem;font-weight:600;letter-spacing:0.05em">Of women cook over open fire</div>
+      </div>
+    </div>
+
+    <!-- Iceberg Model -->
+    <div class="mt-8 reveal">
+      <h3 class="section-title" style="font-size:1.875rem">Why Surface Solutions Fail.</h3>
+      <p class="section-sub mt-2">
+        Most rural energy projects address visible problems and ignore the structural root causes. BioViL uses the Iceberg Model to do the opposite.
+      </p>
+    </div>
+    <div class="iceberg-diagram reveal mt-6">
+      <div class="iceberg-diagram__top">
+        <div class="iceberg-diagram__label"><svg class="icon-svg icon-svg--lg" viewBox="0 0 24 24"><path d="m18 15-6-6-6 6"></path></svg> Visible Challenges</div>
+        <ul class="iceberg-diagram__list" style="max-width:400px;margin:0 auto;">
+          <li><svg class="icon-svg" viewBox="0 0 24 24"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c-2.276 0-3.5-1.5-3.5-3s3.5-3 3.5-3s-1.5 1.5-1.5 3c0 1.5 1.255 3 3.5 3s3.5 1.5 3.5 3.5s-2.023 4-4.5 4c-3.5 0-4.5-3-4.5-3"></path><path d="M4.5 10c0-1.5 1-3.5 3-5M19.5 10c0-1.5-1-3.5-3-5"></path></svg> Overuse of firewood and fossil fuels</li>
+          <li><svg class="icon-svg" viewBox="0 0 24 24"><path d="M7 11V7a5 5 0 0 1 10 0v4"></path><path d="M4 11h16v11H4z"></path></svg> Women's health crisis from wood-smoke inhalation</li>
+          <li><svg class="icon-svg" viewBox="0 0 24 24"><path d="M12 22v-6M12 16L7.5 10M12 16l4.5-6M12 2L4 12h16L12 2z"></path></svg> Agricultural waste accumulating unused on farms</li>
+        </ul>
+      </div>
+      <div class="iceberg-diagram__water-line"></div>
+      <div class="iceberg-diagram__bottom">
+        <div class="iceberg-diagram__label"><svg class="icon-svg icon-svg--lg" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"></path></svg> Hidden Root Causes</div>
+        <ul class="iceberg-diagram__list" style="display:inline-flex;flex-direction:column;">
+          <li><svg class="icon-svg" viewBox="0 0 24 24"><path d="M12 22v-6M12 16L7.5 10M12 16l4.5-6M12 2L4 12h16L12 2z"></path></svg> Chronic deforestation with no alternatives available</li>
+          <li><svg class="icon-svg" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><path d="m9 22 3-8 3 8"></path></svg> Biogas plants abandoned, no community follow-up</li>
+          <li><svg class="icon-svg" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg> Absence of community energy protection policies</li>
+          <li><svg class="icon-svg" viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg> Cultural belief: "the forest is infinite"</li>
+          <li><svg class="icon-svg" viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path><path d="M3 3v5h5"></path></svg> Social stigma: "biogas smells", perception barrier</li>
+        </ul>
+      </div>
+    </div>
+    <div class="text-center mt-4">
+
+    </div>
+
+    <!-- Prototyping Chronicles -->
+    <span class="section-label section-label--red mt-8">Prototyping Chronicles</span>
+    <h2 class="section-title">What We Built. What Failed.<br><span style="color:var(--green-600)">What We Learned.</span></h2>
+    <p class="section-sub mt-2" style="max-width:100%">
+      Real innovation isn't linear. Here's our unfiltered log of prototype development, successes, failures, and pivots.
+    </p>
+
+    <!-- Chronicle 1 -->
+    <div class="card reveal mt-6" style="border-left:4px solid var(--green-700)">
+      <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:1rem;flex-wrap:wrap">
+        <span class="tag">January 2025</span>
+        <span class="tag" style="background:#e8f5e9;color:var(--green-700)">Completed</span>
+      </div>
+      <h3 class="card__title">The MVP Biodigester</h3>
+      <p class="card__body">
+        We built our first working biodigester prototype using locally available materials.
+        The core anaerobic digestion process worked, waste in, biogas out.
+        This proved our fundamental model was sound.
+      </p>
+      <p class="card__body mt-2" style="border-top:1px solid var(--grey-100);padding-top:1rem">
+        <strong style="color:var(--green-700)">KEY LEARNING:</strong> Local materials reduce cost and increase community buy-in.
+        Farmers trust systems they recognise and can repair themselves.
+      </p>
+    </div>
+
+    <!-- Chronicle 2 -->
+    <div class="card reveal mt-4" style="border-left:4px solid var(--blue-700)">
+      <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:1rem;flex-wrap:wrap">
+        <span class="tag">February 2025</span>
+        <span class="tag" style="background:#e3f2fd;color:var(--blue-700)">Pivoted</span>
+      </div>
+      <h3 class="card__title">Manual Monitoring System</h3>
+      <p class="card__body">
+        We introduced a manual logbook and gauge system for farmers to track gas pressure and slurry pH.
+        Result: Low compliance. Farmers were too busy to record data every day.
+        The system was designed for researchers, not users.
+      </p>
+      <p class="card__body mt-2" style="border-top:1px solid var(--grey-100);padding-top:1rem">
+        <strong style="color:var(--blue-700)">KEY LEARNING:</strong> Tech must be passive and automated.
+        If a solution requires extra work from a farmer, it is not a solution.
+      </p>
+    </div>
+
+    <!-- Chronicle 3 -->
+    <div class="card reveal mt-4" style="border-left:4px solid var(--blue-700)">
+      <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:1rem;flex-wrap:wrap">
+        <span class="tag">July 2025, Ongoing</span>
+        <span class="tag" style="background:#e3f2fd;color:var(--blue-700)">In Progress</span>
+      </div>
+      <h3 class="card__title">Automated Monitoring System</h3>
+      <p class="card__body">
+        Based on farmer feedback, we are prototyping an IoT-connected monitoring solution
+        that sends real-time biogas data to a simple SMS or app interface.
+        No charts. No manual input. Just a message: <em>"Your system is running well."</em>
+      </p>
+      <p class="card__body mt-2" style="border-top:1px solid var(--grey-100);padding-top:1rem">
+        <strong style="color:var(--blue-700)">TARGET:</strong> Deploy alongside first full-scale biodigester operating January 2026.
+      </p>
+    </div>
+
+    <!-- Philosophy box -->
+    <div class="info-box mt-6 reveal" style="border-left-color:var(--green-700)">
+      <div class="info-box__title" style="color:var(--green-700)">Our Prototype Philosophy</div>
+      <p class="info-box__body">
+        Build the simplest possible version. Put it in front of real people.
+        Listen to what breaks. Fix it. Repeat.
+      </p>
+    </div>
+
+  </div>
+</div><!-- end tab-panel#our-findings -->
+
+
+
+
+
+
+
+
+
+
+<!-- CTA STRIP -->
+<section class="cta-strip cta-strip--blue">
+  <div class="container text-center">
+    <h2 class="section-title section-title--white">Questions About the Technology?</h2>
+    <p class="section-sub section-sub--white text-center mt-2" style="margin:1rem auto">
+      We're open to technical collaborations, research partnerships, and questions from curious minds everywhere.
+    </p>
+    <a href="contact.html" class="btn btn-white mt-4" style="display:inline-flex">Get In Touch →</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer__grid">
+      <div>
+        <img src="assets/logo-light.png" alt="BioViL" class="footer__logo-img" onerror="this.outerHTML='<div style=\'font-weight:900;font-size:1.6rem;color:white;margin-bottom:1rem\'>🌿 BioViL</div>'">
+        <p class="footer__brand-text">Converting waste into clean energy, and communities into partners.</p>
+        <div class="footer__socials">
+          <a href="#" class="social-icon">in</a><a href="#" class="social-icon">&#9825;</a><a href="#" class="social-icon">✆</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer__col-title">Company</div>
+        <ul class="footer__links">
+          <li><a href="index.html">Home</a></li><li><a href="about.html">About Us</a></li>
+          <li><a href="journey.html">Our Journey</a></li>
+      <li class="nav-has-dropdown">
+        <a href="#" class="nav-link nav-link--dropdown" aria-haspopup="true" aria-expanded="false">
+          Projects <svg class="nav-dropdown-chevron" viewBox="0 0 24 24" width="12" height="12" style="margin-left:3px;vertical-align:middle;transition:transform 0.2s"><path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round"/></svg>
+        </a>
+        <ul class="nav-dropdown" role="menu">
+          <li role="none"><a href="prototype-1.html" class="nav-dropdown__item" role="menuitem">Prototype I</a></li>
+        </ul>
+      </li><li><a href="resource.html">Resource</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer__col-title">Get Involved</div>
+        <ul class="footer__links">
+          <li><a href="contact.html?type=farmer">For Farmers</a></li>
+          <li><a href="contact.html?type=partner">For Partners</a></li>
+          <li><a href="contact.html?type=investor">For Investors</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer__col-title">Contact</div>
+        <div class="footer__contact-item"><svg class="icon-svg" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg><span>Pankaj Sharma</span></div>
+        <div class="footer__contact-item"><svg class="icon-svg" viewBox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path><circle cx="12" cy="10" r="3"></circle></svg><span>Assam, India</span></div>
+        <div class="footer__contact-item"><svg class="icon-svg" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg><a href="mailto:contact@biovil.co.in" style="color:inherit;text-decoration:none;">contact@biovil.co.in</a></div>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>© 2025 BioViL. All rights reserved.</span>
+      <span>A project under the beVisioneers: The Mercedes-Benz Fellowship.</span>
+    </div>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>
