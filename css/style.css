@@ -359,9 +359,11 @@ ul { list-style: none; }
   top: 1.5rem; right: 1.5rem;
   background: none; border: none;
   color: var(--white);
-  font-size: 2rem;
+  font-size: 2.5rem;
   cursor: pointer;
   line-height: 1;
+  padding: 10px;
+  z-index: 1000;
 }
 
 /* ============================================
