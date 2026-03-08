@@ -539,7 +539,8 @@ ul { list-style: none; }
   align-items: center;
   position: relative;
   overflow: hidden;
-  padding-top: 6rem;
+  padding-top: 8rem;
+  padding-bottom: 6rem;
 }
 
 .hero-inner__bg {
@@ -560,6 +561,7 @@ ul { list-style: none; }
   position: relative;
   z-index: 2;
   max-width: 800px;
+  margin-bottom: 3rem;
 }
 
 /* ============================================
