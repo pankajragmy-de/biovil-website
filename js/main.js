@@ -135,64 +135,61 @@ if (visionEl) {
   wordObserver.observe(visionEl);
 }
 
-// --- Circular Diagram (Home) ---
-const circularNodes = document.querySelectorAll('.circular-node');
-if (circularNodes.length > 0) {
-  const stepsData = [
-    { title: "Collect Waste", desc: "Farm residues and household organic waste collected directly from local farming communities.", num: "STEP 01" },
-    { title: "Digest", desc: "Waste feeds our sealed biodigester where millions of microbes break it down anaerobically.", num: "STEP 02" },
-    { title: "Generate Energy", desc: "Methane-rich biogas is safely piped to rural homes for clean cooking and reliable electricity.", num: "STEP 03" },
-    { title: "Multiply Impact", desc: "Surplus energy is sold, digestate fertilizes fields, and farmers earn passive income.", num: "STEP 04" }
-  ];
+// --- Sticky Scroll Animation (Home) ---
+const processTrack = document.getElementById("process-track");
+const processCards = document.querySelectorAll(".process-card");
 
-  let currentStep = 0;
-  const cpNum = document.getElementById('cp-num');
-  const cpTitle = document.getElementById('cp-title');
-  const cpDesc = document.getElementById('cp-desc');
-  const cpContent = document.getElementById('cp-content');
+if (processTrack && processCards.length > 0 && typeof gsap !== 'undefined') {
+  const tl = gsap.timeline({ repeat: -1 });
+  const segmentTime = 1.8;
+  const duration = segmentTime * processCards.length;
 
-  function updateCircularStep(index) {
-    circularNodes.forEach(n => n.classList.remove('active'));
-    circularNodes[index].classList.add('active');
-    
-    cpContent.style.opacity = 0;
-    setTimeout(() => {
-      cpNum.textContent = stepsData[index].num;
-      cpTitle.textContent = stepsData[index].title;
-      cpDesc.textContent = stepsData[index].desc;
-      cpContent.style.opacity = 1;
-    }, 300);
+  // Progress bar animation
+  if (window.innerWidth > 900) {
+    tl.to(".progress-bar", {
+      width: "100%",
+      ease: "none",
+      duration: duration - segmentTime + 0.5
+    }, 0);
+  } else {
+    tl.to({}, { duration: duration }); // Dummy wait if no bar
   }
 
-  // Position nodes on circle
-  const radius = 170; // half of 340px container
-  circularNodes.forEach((node, i) => {
-    const angle = (i * (360 / circularNodes.length) - 90) * (Math.PI / 180);
-    const x = Math.cos(angle) * radius;
-    const y = Math.sin(angle) * radius;
-    node.style.left = `calc(50% + ${x}px)`;
-    node.style.top = `calc(50% + ${y}px)`;
+  let hoveredCard = null;
 
-    node.addEventListener('click', () => {
-      currentStep = i;
-      updateCircularStep(currentStep);
-      resetInterval();
+  // Track hover state for each card
+  processCards.forEach((card) => {
+    card.addEventListener("mouseenter", () => {
+      hoveredCard = card;
+      if (card.classList.contains("is-active")) {
+        tl.pause();
+      }
+    });
+
+    card.addEventListener("mouseleave", () => {
+      hoveredCard = null;
+      tl.play();
     });
   });
 
-  let cycleInterval = setInterval(nextStep, 4000);
+  // Sequentially highlight cards
+  processCards.forEach((card, i) => {
+    const startTime = i * segmentTime;
+    tl.call(() => {
+      processCards.forEach(c => c.classList.remove("is-active"));
+      card.classList.add("is-active");
 
-  function nextStep() {
-    currentStep = (currentStep + 1) % circularNodes.length;
-    updateCircularStep(currentStep);
-  }
+      // Pause if the card that just became active is currently being hovered
+      if (hoveredCard === card) {
+        tl.pause();
+      }
+    }, null, startTime);
+  });
 
-  function resetInterval() {
-    clearInterval(cycleInterval);
-    cycleInterval = setInterval(nextStep, 4000);
-  }
-
-  updateCircularStep(0);
+  // Reset at end
+  tl.to({}, { duration: segmentTime }); // hold last card
+  tl.call(() => processCards[processCards.length - 1].classList.remove("is-active"), null, duration);
+  if (window.innerWidth > 900) tl.set(".progress-bar", { width: "0%" });
 }
 
 
