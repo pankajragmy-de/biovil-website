@@ -1990,3 +1990,92 @@ ul { list-style: none; }
     padding: 0.5rem 0 !important;
   }
 }
+/* ============================================
+   PROCESS TRACK ANIMATION (Shared)
+   ============================================ */
+.track { 
+  width: 100%; 
+  max-width: 1200px; 
+  display: grid; 
+  grid-template-columns: repeat(4, 1fr); 
+  gap: 1.5rem; 
+  position: relative; 
+  margin: 3rem auto; 
+}
+
+.process-card { 
+  background: var(--white); 
+  padding: 2.5rem 1.5rem; 
+  border-radius: var(--radius-md); 
+  box-shadow: var(--shadow-md); 
+  transform: translateY(0); 
+  opacity: 0.5; 
+  transition: all var(--transition-slow); 
+  text-align: center; 
+  border-bottom: 4px solid transparent; 
+}
+
+.process-card.is-active { 
+  opacity: 1; 
+  transform: translateY(-10px); 
+  box-shadow: var(--shadow-lg); 
+  border-bottom: 4px solid var(--green-700); 
+}
+
+.step-num { 
+  font-size: 0.9rem; 
+  font-weight: 800; 
+  color: var(--green-700); 
+  letter-spacing: 2px; 
+  text-transform: uppercase; 
+  margin-bottom: 1rem; 
+  display: flex; 
+  flex-direction: column; 
+  align-items: center; 
+  justify-content: center; 
+  gap: 0.5rem; 
+}
+
+.step-num .icon-svg { 
+  width: 32px; 
+  height: 32px; 
+  margin-bottom: 0.25rem; 
+}
+
+.process-card h3 { 
+  font-size: 1.5rem; 
+  color: var(--grey-900); 
+  margin: 0 0 1rem 0; 
+}
+
+.process-card p { 
+  font-size: 1rem; 
+  color: var(--grey-700); 
+  line-height: 1.5; 
+  margin: 0; 
+}
+
+.progress-track { 
+  position: absolute; 
+  bottom: -2rem; 
+  left: 12.5%; 
+  width: 75%; 
+  height: 4px; 
+  background: rgba(46,125,50,0.2); 
+  border-radius: 2px; 
+}
+
+.progress-bar { 
+  position: absolute; 
+  top: 0; 
+  left: 0; 
+  width: 0%; 
+  height: 100%; 
+  background: var(--green-700); 
+  border-radius: 2px; 
+}
+
+@media (max-width: 900px) {
+  .track { grid-template-columns: 1fr; gap: 1.5rem; }
+  .progress-track { display: none; }
+}

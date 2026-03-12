@@ -137,16 +137,17 @@ if (visionEl) {
 
 // --- Sticky Scroll Animation (Home) ---
 const processTrack = document.getElementById("process-track");
-const processCards = document.querySelectorAll(".process-card");
-
-if (processTrack && processCards.length > 0 && typeof gsap !== 'undefined') {
+if (processTrack && typeof gsap !== 'undefined') {
+  const processCards = processTrack.querySelectorAll(".process-card");
+  if (processCards.length > 0) {
   const tl = gsap.timeline({ repeat: -1 });
   const segmentTime = 1.8;
   const duration = segmentTime * processCards.length;
 
   // Progress bar animation
-  if (window.innerWidth > 900) {
-    tl.to(".progress-bar", {
+  const progressBar = processTrack.querySelector(".progress-bar");
+  if (progressBar && window.innerWidth > 900) {
+    tl.to(progressBar, {
       width: "100%",
       ease: "none",
       duration: duration - segmentTime + 0.5
@@ -166,9 +167,19 @@ if (processTrack && processCards.length > 0 && typeof gsap !== 'undefined') {
       }
     });
 
+    card.addEventListener("mousemove", () => {
+      // Robustness: ensure hoveredCard is set if mouse is moving over it
+      if (hoveredCard !== card) {
+        hoveredCard = card;
+        if (card.classList.contains("is-active")) tl.pause();
+      }
+    });
+
     card.addEventListener("mouseleave", () => {
-      hoveredCard = null;
-      tl.play();
+      if (hoveredCard === card) {
+        hoveredCard = null;
+        tl.play();
+      }
     });
   });
 
@@ -190,6 +201,7 @@ if (processTrack && processCards.length > 0 && typeof gsap !== 'undefined') {
   tl.to({}, { duration: segmentTime }); // hold last card
   tl.call(() => processCards[processCards.length - 1].classList.remove("is-active"), null, duration);
   if (window.innerWidth > 900) tl.set(".progress-bar", { width: "0%" });
+  }
 }
 
 
