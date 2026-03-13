@@ -294,9 +294,57 @@ const contactForm = document.getElementById('biovil-contact-form');
 if (contactForm) {
   contactForm.addEventListener('submit', function(e) {
     e.preventDefault();
-    contactForm.style.display = 'none';
-    const success = document.querySelector('.form-success');
-    if (success) success.style.display = 'block';
+    
+    // Basic validation check
+    if (!contactForm.checkValidity()) {
+        contactForm.reportValidity();
+        return;
+    }
+
+    const submitBtn = contactForm.querySelector('button[type="submit"]');
+    const originalBtnText = submitBtn.innerHTML;
+    
+    // UI Feedback: Loading state
+    submitBtn.disabled = true;
+    submitBtn.innerHTML = 'Sending...';
+
+    const formData = new FormData(contactForm);
+    const data = Object.fromEntries(formData.entries());
+
+    // Use Formspree for email handling
+    fetch('https://formspree.io/f/xvgzgeea', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => {
+        if (response.ok) {
+            contactForm.style.display = 'none';
+            const success = document.querySelector('.form-success');
+            if (success) {
+                success.style.display = 'block';
+                success.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+        } else {
+            response.json().then(data => {
+                if (Object.hasOwn(data, 'errors')) {
+                    alert('Error: ' + data.errors.map(error => error.message).join(", "));
+                } else {
+                    alert('Oops! There was a problem submitting your form. Please try again or contact us directly.');
+                }
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = originalBtnText;
+            });
+        }
+    })
+    .catch(error => {
+        alert('Oops! There was a problem submitting your form. Please check your connection and try again.');
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = originalBtnText;
+    });
   });
 }
 
