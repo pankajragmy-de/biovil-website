@@ -312,7 +312,7 @@ if (contactForm) {
     const data = Object.fromEntries(formData.entries());
 
     // Security: Adding the key and honeypot in JS
-    data.apiKey = 'sf_cb51kfn7ej24kdjg65ha2e66'; // StaticForms API Key
+    data.accessKey = 'sf_1m41beimbnkm2km8jb52cade'; // New StaticForms key applied
     data.honeypot = ''; 
 
     // Use StaticForms for email handling
