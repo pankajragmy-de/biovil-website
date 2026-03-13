@@ -216,7 +216,10 @@
         <p class="section-sub mt-2">We read every message personally and respond within 48 hours.</p>
 
         <div class="contact-form-card mt-4">
-          <form id="biovil-contact-form" action="https://formspree.io/f/xvgzgeea" method="POST" novalidate>
+          <form id="biovil-contact-form" action="https://api.staticforms.xyz/submit" method="POST" novalidate>
+            <!-- Replace with your real accessKey from staticforms.xyz -->
+            <input type="hidden" name="accessKey" value="YOUR_ACCESS_KEY_HERE">
+            <input type="text" name="honeypot" style="display:none">
             <div class="form-grid">
               <div class="form-group">
                 <label for="name">Full Name *</label>
