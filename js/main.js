@@ -312,7 +312,7 @@ if (contactForm) {
     const data = Object.fromEntries(formData.entries());
 
     // Security: Adding the key and honeypot in JS to keep HTML cleaner
-    data.accessKey = 'YOUR_ACCESS_KEY_HERE'; // Replace with your real key
+    data.accessKey = 'sf_cb51kfn7ej24kdjg65ha2e66'; // Real StaticForms key applied
     data.replyTo = '@'; // Optional: Required if you want a Reply-To header in your email
 
     // Use StaticForms for email handling
