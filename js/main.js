@@ -311,9 +311,9 @@ if (contactForm) {
     const formData = new FormData(contactForm);
     const data = Object.fromEntries(formData.entries());
 
-    // Security: Adding the key and honeypot in JS to keep HTML cleaner
-    data.accessKey = 'sf_cb51kfn7ej24kdjg65ha2e66'; // Real StaticForms key applied
-    data.replyTo = '@'; // Optional: Required if you want a Reply-To header in your email
+    // Security: Adding the key and honeypot in JS
+    data.accessKey = 'sf_cb51kfn7ej24kdjg65ha2e66'; 
+    data.honeypot = ''; 
 
     // Use StaticForms for email handling
     fetch('https://api.staticforms.xyz/submit', {
@@ -333,7 +333,8 @@ if (contactForm) {
                 success.scrollIntoView({ behavior: 'smooth', block: 'center' });
             }
         } else {
-            alert('Error: ' + (result.message || 'Oops! There was a problem submitting your form. Please try again.'));
+            // Detailed error for debugging
+            alert('Submission Error: ' + (result.message || 'The service returned an unknown error. Please check your Access Key or Domain settings.'));
             submitBtn.disabled = false;
             submitBtn.innerHTML = originalBtnText;
         }
