@@ -1,0 +1,19 @@
+[build]
+  publish = "."
+
+# Redirect www → apex domain
+[[redirects]]
+  from   = "https://www.biovil.co.in/*"
+  to     = "https://biovil.co.in/:splat"
+  status = 301
+  force  = true
+
+# Security headers (Netlify applies these at the CDN edge — stronger than meta tags)
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options           = "DENY"
+    X-Content-Type-Options    = "nosniff"
+    Referrer-Policy           = "strict-origin-when-cross-origin"
+    Permissions-Policy        = "camera=(), microphone=(), geolocation=()"
+    Strict-Transport-Security = "max-age=63072000; includeSubDomains; preload"

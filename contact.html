@@ -6,7 +6,7 @@
   <meta http-equiv="X-Content-Type-Options" content="nosniff" />
   <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin" />
   <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=()" />
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' https://fonts.googleapis.com 'unsafe-inline'; font-src https://fonts.gstatic.com; img-src 'self' https://images.unsplash.com data: blob:; connect-src 'self' https://api.staticforms.xyz; frame-src 'none'; object-src 'none'; base-uri 'self'; form-action 'self' https://api.staticforms.xyz;" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' https://fonts.googleapis.com 'unsafe-inline'; font-src https://fonts.gstatic.com; img-src 'self' https://images.unsplash.com data: blob:; connect-src 'self'; frame-src 'none'; object-src 'none'; base-uri 'self'; form-action 'self';" />
   <title>Get Involved | BioViL</title>
   <meta name="description" content="Get in touch with BioViL, whether you're a farmer, partner, investor, or researcher, we'd love to hear from you." />
   
@@ -221,7 +221,13 @@
         <p class="section-sub mt-2">We read every message personally and respond within 48 hours.</p>
 
         <div class="contact-form-card mt-4">
-          <form id="biovil-contact-form" action="https://api.staticforms.xyz/submit" method="POST" novalidate>
+          <form id="biovil-contact-form" name="biovil-contact" action="/contact.html" method="POST" data-netlify="true" data-netlify-honeypot="bot-field" novalidate>
+            <!-- Netlify: required hidden field so AJAX submissions are routed correctly -->
+            <input type="hidden" name="form-name" value="biovil-contact" />
+            <!-- Netlify: honeypot trap for bots (hidden from real users) -->
+            <div hidden aria-hidden="true">
+              <input name="bot-field" />
+            </div>
             <div class="form-grid">
               <div class="form-group">
                 <label for="name">Full Name *</label>

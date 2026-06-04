@@ -316,25 +316,17 @@ if (contactForm) {
     submitBtn.disabled = true;
     submitBtn.innerHTML = 'Sending...';
 
+    // Encode form data for Netlify (application/x-www-form-urlencoded)
     const formData = new FormData(contactForm);
-    const data = Object.fromEntries(formData.entries());
+    const encoded = new URLSearchParams(formData).toString();
 
-    // NOTE: Regenerate this key on staticforms.xyz and restrict it to biovil.co.in only.
-    // The key is visible in source — domain-restriction is the primary protection.
-    data.accessKey = 'sf_1m41beimbnkm2km8jb52cade';
-    data.honeypot = '';
-
-    // Use StaticForms for email handling
-    fetch('https://api.staticforms.xyz/submit', {
+    fetch('/', {
         method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data)
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: encoded
     })
-    .then(response => response.json())
-    .then(result => {
-        if (result.success) {
+    .then(response => {
+        if (response.ok) {
             contactForm.style.display = 'none';
             const success = document.querySelector('.form-success');
             if (success) {
@@ -342,19 +334,7 @@ if (contactForm) {
                 success.scrollIntoView({ behavior: 'smooth', block: 'center' });
             }
         } else {
-            alert('Submission Error: ' + (result.message || 'Unknown error. Please check your Access Key or Domain settings.'));
-            let countdown = 5;
-            submitBtn.innerHTML = `Try again in ${countdown}s`;
-            const timer = setInterval(() => {
-                countdown--;
-                if (countdown <= 0) {
-                    clearInterval(timer);
-                    submitBtn.disabled = false;
-                    submitBtn.innerHTML = originalBtnText;
-                } else {
-                    submitBtn.innerHTML = `Try again in ${countdown}s`;
-                }
-            }, 1000);
+            throw new Error('Network response was not ok');
         }
     })
     .catch(() => {
