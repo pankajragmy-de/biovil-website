@@ -1,0 +1,10 @@
+# macOS
+.DS_Store
+**/.DS_Store
+
+# Working files / drafts (not for public serving)
+resources/
+
+# Logs
+*.log
+npm-debug.log*

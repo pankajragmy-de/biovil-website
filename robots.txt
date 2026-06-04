@@ -1,4 +1,6 @@
 User-agent: *
 Allow: /
+Disallow: /dashboard/Documentation/
+Disallow: /resources/
 
 Sitemap: https://biovil.co.in/sitemap.xml

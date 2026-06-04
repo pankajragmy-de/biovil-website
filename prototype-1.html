@@ -4,6 +4,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+  <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin" />
+  <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=()" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' https://fonts.googleapis.com 'unsafe-inline'; font-src https://fonts.gstatic.com; img-src 'self' https://images.unsplash.com data: blob:; connect-src 'self'; frame-src 'none'; object-src 'none'; base-uri 'self'; form-action 'none';" />
   <title>Prototype I | BioViL</title>
   <meta name="description"
     content="Engineering Autonomy in Assam, the story behind BioViL's first working fixed-dome biodigester." />
@@ -16,7 +20,7 @@
   <meta property="og:title" content="Prototype I | BioViL" />
   <meta property="og:description"
     content="Engineering Autonomy in Assam, the story behind BioViL's first working fixed-dome biodigester." />
-  <meta property="og:image" content="https://biovil.co.in/assets/logo-colour.svg" />
+  <meta property="og:image" content="https://biovil.co.in/assets/logo-colour.png" />
 
   <!-- Twitter -->
   <meta property="twitter:card" content="summary_large_image" />
@@ -24,7 +28,7 @@
   <meta property="twitter:title" content="Prototype I | BioViL" />
   <meta property="twitter:description"
     content="Engineering Autonomy in Assam, the story behind BioViL's first working fixed-dome biodigester." />
-  <meta property="twitter:image" content="https://biovil.co.in/assets/logo-colour.svg" />
+  <meta property="twitter:image" content="https://biovil.co.in/assets/logo-colour.png" />
 
   <link rel="stylesheet" href="css/style.css" />
   <style>
@@ -457,8 +461,7 @@
             <li><a href="prototype-1.html">Prototype I</a></li>
           </ul>
         </li>
-        <li><a href="resource.html" class="nav-link">Resource</a>
-    <a href="dashboard/index.html" class="nav-link">Impact ↗</a></li>
+        <li><a href="resource.html" class="nav-link">Resource</a></li>
         <li><a href="dashboard/index.html" class="nav-link">Impact ↗</a></li>
       </ul>
       <a href="contact.html" class="btn btn-primary nav-cta">Get Involved →</a>
@@ -661,7 +664,7 @@
             A beVisioneers Fellowship Initiative.
           </p>
           <div class="footer__socials">
-            <a href="https://linkedin.com/company/biovil" target="_blank" class="social-icon" aria-label="LinkedIn"><svg
+            <a href="https://linkedin.com/company/biovil" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="LinkedIn"><svg
                 class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                 stroke-linecap="round" stroke-linejoin="round" style="width:18px;height:18px;">
                 <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>

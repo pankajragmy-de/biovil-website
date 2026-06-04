@@ -4,6 +4,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+  <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin" />
+  <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=()" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://unpkg.com 'unsafe-inline'; style-src 'self' https://fonts.googleapis.com 'unsafe-inline'; font-src https://fonts.gstatic.com; img-src 'self' https://images.unsplash.com https://upload.wikimedia.org data: blob:; connect-src 'self' https://api.staticforms.xyz; frame-src 'none'; object-src 'none'; base-uri 'self'; form-action 'self' https://api.staticforms.xyz;" />
   <title>BioViL | Clean Biogas Energy for Rural India</title>
   <meta name="description" content="BioViL converts agricultural and household waste into clean, affordable biogas, creating energy independence for rural communities across India." />
   
@@ -14,14 +18,14 @@
   <meta property="og:url" content="https://biovil.co.in/" />
   <meta property="og:title" content="BioViL | Clean Biogas Energy for Rural India" />
   <meta property="og:description" content="BioViL converts agricultural and household waste into clean, affordable biogas, creating energy independence for rural communities across India." />
-  <meta property="og:image" content="https://biovil.co.in/assets/logo-colour.svg" />
+  <meta property="og:image" content="https://biovil.co.in/assets/logo-colour.png" />
 
   <!-- Twitter -->
   <meta property="twitter:card" content="summary_large_image" />
   <meta property="twitter:url" content="https://biovil.co.in/" />
   <meta property="twitter:title" content="BioViL | Clean Biogas Energy for Rural India" />
   <meta property="twitter:description" content="BioViL converts agricultural and household waste into clean, affordable biogas, creating energy independence for rural communities across India." />
-  <meta property="twitter:image" content="https://biovil.co.in/assets/logo-colour.svg" />
+  <meta property="twitter:image" content="https://biovil.co.in/assets/logo-colour.png" />
 
   <!-- JSON-LD Structured Data -->
   <script type="application/ld+json">
@@ -309,8 +313,7 @@
             <li><a href="prototype-1.html">Prototype I</a></li>
           </ul>
         </li>
-        <li><a href="resource.html" class="nav-link">Resource</a>
-    <a href="dashboard/index.html" class="nav-link">Impact ↗</a></li>
+        <li><a href="resource.html" class="nav-link">Resource</a></li>
         <li><a href="dashboard/index.html" class="nav-link">Impact ↗</a></li>
       </ul>
       <a href="contact.html" class="btn btn-primary nav-cta">Get Involved →</a>
@@ -679,7 +682,7 @@
 
         <div class="img-card reveal">
           <div class="img-card__bg"
-            style="background-image:url('https://images.unsplash.com/photo-1605000797499-95a51c5269ae?w=800&q=80')">
+            data-bg="url('https://images.unsplash.com/photo-1605000797499-95a51c5269ae?w=800&q=80')">
           </div>
           <div class="img-card__overlay"></div>
           <div class="img-card__content">
@@ -698,7 +701,7 @@
 
         <div class="img-card reveal reveal-delay-1">
           <div class="img-card__bg"
-            style="background-image:url('https://images.unsplash.com/photo-1531206715517-5c0ba140b2b8?w=800&q=80')">
+            data-bg="url('https://images.unsplash.com/photo-1531206715517-5c0ba140b2b8?w=800&q=80')">
           </div>
           <div class="img-card__overlay"></div>
           <div class="img-card__content">
@@ -720,7 +723,7 @@
 
         <div class="img-card reveal reveal-delay-2">
           <div class="img-card__bg"
-            style="background-image:url('https://images.unsplash.com/photo-1466611653911-95081537e5b7?w=800&q=80')">
+            data-bg="url('https://images.unsplash.com/photo-1466611653911-95081537e5b7?w=800&q=80')">
           </div>
           <div class="img-card__overlay"></div>
           <div class="img-card__content">
@@ -755,7 +758,7 @@
             A beVisioneers Fellowship Initiative.
           </p>
           <div class="footer__socials">
-            <a href="https://linkedin.com/company/biovil" target="_blank" class="social-icon" aria-label="LinkedIn"><svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:18px;height:18px;"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg></a>
+            <a href="https://linkedin.com/company/biovil" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="LinkedIn"><svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:18px;height:18px;"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg></a>
             <a href="#" class="social-icon" aria-label="Instagram"><svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:18px;height:18px;"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg></a>
             <a href="mailto:contact@biovil.co.in" class="social-icon" aria-label="Email"><svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:18px;height:18px;"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg></a>
           </div>
@@ -814,8 +817,49 @@
     </div>
   </footer>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <!-- ═══════════════════ CHATBOT WIDGET ══════════════════════════ -->
+  <div id="chatbot-widget" class="chatbot-widget">
+    <!-- Chat Window -->
+    <div id="chatbot-window" class="chatbot-window">
+      <div class="chatbot-header">
+        <div class="chatbot-header-info">
+          <svg class="icon-svg" viewBox="0 0 24 24" style="width:20px;height:20px;color:var(--green-300);">
+            <path d="M12 2a10 10 0 0 1 10 10c0 5.523-4.477 10-10 10a9.96 9.96 0 0 1-4.722-1.185L2 22l1.378-5.467A9.965 9.965 0 0 1 2 12C2 6.477 6.477 2 12 2z"></path>
+          </svg>
+          <div>
+            <strong>BioViL Assistant</strong>
+            <span class="chatbot-status">Online</span>
+          </div>
+        </div>
+        <button id="chatbot-close" aria-label="Close Chat">✕</button>
+      </div>
+      
+      <div id="chatbot-messages" class="chatbot-messages">
+        <div class="chat-message bot-message">
+          Hello! I'm the BioViL AI Assistant. How can I help you today? You can ask me about biogas, our impact, or how to get involved.
+        </div>
+      </div>
+
+      <form id="chatbot-form" class="chatbot-form">
+        <input type="text" id="chatbot-input" placeholder="Type your question..." required autocomplete="off" maxlength="500">
+        <button type="submit" aria-label="Send Message">
+          <svg class="icon-svg" viewBox="0 0 24 24" style="width:18px;height:18px;">
+            <line x1="22" y1="2" x2="11" y2="13"></line>
+            <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+          </svg>
+        </button>
+      </form>
+    </div>
+
+    <!-- Toggle Button -->
+    <button id="chatbot-toggle" class="chatbot-toggle" aria-label="Open Chat">
+      <svg class="icon-svg chat-icon-open" viewBox="0 0 24 24">
+        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+      </svg>
+    </button>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" integrity="sha384-d+vyQ0dYcymoP8ndq2hW7FGC50nqGdXUEgoOUGxbbkAJwZqL7h+jKN0GGgn9hFDS" crossorigin="anonymous"></script>
   <script src="js/main.js"></script>
 </body>
-
 </html>

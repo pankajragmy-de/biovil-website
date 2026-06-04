@@ -65,6 +65,21 @@ if (mobileDropdownToggle && mobileDropdown) {
   });
 })();
 
+// --- Lazy-load background images (data-bg="url(...)") ---
+const bgObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const url = entry.target.dataset.bg;
+      if (url) {
+        entry.target.style.backgroundImage = url;
+        bgObserver.unobserve(entry.target);
+      }
+    }
+  });
+}, { rootMargin: '300px' });
+
+document.querySelectorAll('[data-bg]').forEach(el => bgObserver.observe(el));
+
 // --- Scroll reveal animations ---
 const revealObserver = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
@@ -225,33 +240,26 @@ if (hTrack && hContent) {
   });
 
   function renderHScroll() {
-    currentProgress += (targetProgress - currentProgress) * 0.08;
-    
-    // Always apply transform to keep it butter smooth
-    hContent.style.transform = `translateX(-${currentProgress * 75}vw)`;
-    document.body.style.setProperty('--scroll-p', currentProgress);
+    const delta = targetProgress - currentProgress;
+    if (Math.abs(delta) > 0.0005) {
+      currentProgress += delta * 0.08;
 
-    // Calculate per-panel progress (-1 to 1 relative to center screen)
-    hPanels.forEach((panel, i) => {
-      // Each panel represents 0.25 of the total progress (4 panels)
-      // Panel 0 is centered at progress 0, Panel 1 at 0.333, Panel 2 at 0.666, Panel 3 at 1.0
-      const centerProgress = i * (1 / (hPanels.length - 1 || 1));
-      let localOffset = currentProgress - centerProgress; 
-      
-      // Clamp between -1 and 1
-      localOffset = Math.max(-1, Math.min(1, localOffset));
-      
-      // Pass to CSS for per-panel parallax, opacity, blur, etc.
-      panel.style.setProperty('--local-offset', localOffset);
-      
-      // Optional: add an 'in-view' class when it's close to center
-      if (Math.abs(localOffset) < 0.4) {
-        panel.classList.add('in-view');
-      } else {
-        panel.classList.remove('in-view');
-      }
-    });
-    
+      hContent.style.transform = `translateX(-${currentProgress * 75}vw)`;
+      document.body.style.setProperty('--scroll-p', currentProgress);
+
+      hPanels.forEach((panel, i) => {
+        const centerProgress = i * (1 / (hPanels.length - 1 || 1));
+        let localOffset = currentProgress - centerProgress;
+        localOffset = Math.max(-1, Math.min(1, localOffset));
+        panel.style.setProperty('--local-offset', localOffset);
+        if (Math.abs(localOffset) < 0.4) {
+          panel.classList.add('in-view');
+        } else {
+          panel.classList.remove('in-view');
+        }
+      });
+    }
+
     requestAnimationFrame(renderHScroll);
   }
   requestAnimationFrame(renderHScroll);
@@ -311,9 +319,10 @@ if (contactForm) {
     const formData = new FormData(contactForm);
     const data = Object.fromEntries(formData.entries());
 
-    // Security: Adding the key and honeypot in JS
-    data.accessKey = 'sf_1m41beimbnkm2km8jb52cade'; // New StaticForms key applied
-    data.honeypot = ''; 
+    // NOTE: Regenerate this key on staticforms.xyz and restrict it to biovil.co.in only.
+    // The key is visible in source — domain-restriction is the primary protection.
+    data.accessKey = 'sf_1m41beimbnkm2km8jb52cade';
+    data.honeypot = '';
 
     // Use StaticForms for email handling
     fetch('https://api.staticforms.xyz/submit', {
@@ -333,16 +342,35 @@ if (contactForm) {
                 success.scrollIntoView({ behavior: 'smooth', block: 'center' });
             }
         } else {
-            // Detailed error for debugging
-            alert('Submission Error: ' + (result.message || 'The service returned an unknown error. Please check your Access Key or Domain settings.'));
-            submitBtn.disabled = false;
-            submitBtn.innerHTML = originalBtnText;
+            alert('Submission Error: ' + (result.message || 'Unknown error. Please check your Access Key or Domain settings.'));
+            let countdown = 5;
+            submitBtn.innerHTML = `Try again in ${countdown}s`;
+            const timer = setInterval(() => {
+                countdown--;
+                if (countdown <= 0) {
+                    clearInterval(timer);
+                    submitBtn.disabled = false;
+                    submitBtn.innerHTML = originalBtnText;
+                } else {
+                    submitBtn.innerHTML = `Try again in ${countdown}s`;
+                }
+            }, 1000);
         }
     })
-    .catch(error => {
+    .catch(() => {
         alert('Oops! There was a problem submitting your form. Please check your connection and try again.');
-        submitBtn.disabled = false;
-        submitBtn.innerHTML = originalBtnText;
+        let countdown = 5;
+        submitBtn.innerHTML = `Try again in ${countdown}s`;
+        const timer = setInterval(() => {
+            countdown--;
+            if (countdown <= 0) {
+                clearInterval(timer);
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = originalBtnText;
+            } else {
+                submitBtn.innerHTML = `Try again in ${countdown}s`;
+            }
+        }, 1000);
     });
   });
 }
@@ -365,4 +393,119 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
       target.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
   });
+});
+
+/* ============================================
+   CHATBOT LOGIC (Demo)
+   ============================================ */
+document.addEventListener('DOMContentLoaded', () => {
+  const chatbotToggle = document.getElementById('chatbot-toggle');
+  const chatbotWindow = document.getElementById('chatbot-window');
+  const chatbotClose = document.getElementById('chatbot-close');
+  const chatbotForm = document.getElementById('chatbot-form');
+  const chatbotInput = document.getElementById('chatbot-input');
+  const chatbotMessages = document.getElementById('chatbot-messages');
+
+  if (!chatbotToggle || !chatbotWindow) return;
+
+  const MAX_MESSAGES = 50;
+  let messageCount = 1; // initial bot greeting counts as 1
+
+  // Toggle Chat Window
+  chatbotToggle.addEventListener('click', () => {
+    chatbotWindow.classList.add('open');
+    chatbotToggle.style.transform = 'scale(0)';
+    setTimeout(() => chatbotInput.focus(), 300);
+  });
+
+  // Close Chat Window
+  chatbotClose.addEventListener('click', () => {
+    chatbotWindow.classList.remove('open');
+    chatbotToggle.style.transform = 'scale(1)';
+  });
+
+  // Handle Form Submission
+  chatbotForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const message = chatbotInput.value.trim();
+    if (!message) return;
+
+    if (messageCount >= MAX_MESSAGES) {
+      appendMessage('Chat limit reached. Please reload the page to start a new conversation.', 'bot-message');
+      chatbotInput.disabled = true;
+      chatbotForm.querySelector('button[type="submit"]').disabled = true;
+      return;
+    }
+
+    appendMessage(message, 'user-message');
+    chatbotInput.value = '';
+
+    showTypingIndicator();
+    setTimeout(() => {
+      removeTypingIndicator();
+      const response = getBotResponse(message);
+      appendMessage(response, 'bot-message');
+    }, 1500 + Math.random() * 1000);
+  });
+
+  function appendMessage(text, className) {
+    const msgDiv = document.createElement('div');
+    msgDiv.className = `chat-message ${className}`;
+    msgDiv.textContent = text;
+    chatbotMessages.appendChild(msgDiv);
+    messageCount++;
+    scrollToBottom();
+  }
+
+  function showTypingIndicator() {
+    const indicator = document.createElement('div');
+    indicator.className = 'typing-indicator';
+    indicator.id = 'typing-indicator';
+    indicator.innerHTML = '<span></span><span></span><span></span>';
+    chatbotMessages.appendChild(indicator);
+    scrollToBottom();
+  }
+
+  function removeTypingIndicator() {
+    const indicator = document.getElementById('typing-indicator');
+    if (indicator) {
+      indicator.remove();
+    }
+  }
+
+  function scrollToBottom() {
+    chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+  }
+
+  // Simple Keyword Matching for Demo Responses
+  function getBotResponse(input) {
+    const lowerInput = input.toLowerCase();
+
+    if (lowerInput.includes('cost') || lowerInput.includes('price') || lowerInput.includes('pay') || lowerInput.includes('euro')) {
+      return "BioViL operates on a subsidized cooperative model. We received €3,000 in fellowship funding to build our first prototype. For farmers, the system is highly affordable as it pays for itself via energy savings and fertilizer generation within months. Would you like to join as a partner or investor?";
+    }
+    
+    if (lowerInput.includes('biogas') || lowerInput.includes('how it works') || lowerInput.includes('technology')) {
+      return "Our biodigesters use a process called anaerobic digestion. Microbes break down farm waste and animal dung in an oxygen-free environment, releasing methane gas which is piped directly to homes for clean, smoke-free cooking. It's safe, simple, and extremely reliable!";
+    }
+
+    if (lowerInput.includes('impact') || lowerInput.includes('health') || lowerInput.includes('smoke')) {
+      return "Our primary impact is health and environment. By replacing firewood with biogas, we eliminate toxic indoor smoke that primarily harms women and children. We also stop deforestation and convert rotting waste into rich organic fertilizer (digestate) for the soil.";
+    }
+    
+    if (lowerInput.includes('where') || lowerInput.includes('location') || lowerInput.includes('assam')) {
+      return "We are currently implementing our first prototype in rural Assam, India, with plans to expand to 10 target villages by 2030.";
+    }
+
+    if (lowerInput.includes('hello') || lowerInput.includes('hi ') || lowerInput.includes('hey')) {
+      return "Hello there! How can I assist you with BioViL today? You can ask about our biogas tech, our costs, or our mission in Assam.";
+    }
+
+    if (lowerInput.includes('contact') || lowerInput.includes('email') || lowerInput.includes('call')) {
+      return "You can reach out to us at contact@biovil.co.in or visit our Contact Us page to fill out a partnership form.";
+    }
+
+    // Default Fallback
+    return "That's a great question! I'm still a demo AI, so I might not have all the specific details yet. I'd recommend checking out our 'Resource' or 'About Us' pages, or emailing contact@biovil.co.in for more info.";
+  }
 });
