@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+  <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self'; connect-src 'self'; frame-src 'none'; object-src 'none'; base-uri 'self'; form-action 'none';" />
+  <title>Page Not Found | BioViL</title>
+  <meta name="robots" content="noindex" />
+  <!-- 404 is served at any URL depth, so every path here is root-absolute -->
+  <link rel="icon" type="image/png" href="/assets/favicon-light.png" media="(prefers-color-scheme: light)" />
+  <link rel="icon" type="image/png" href="/assets/favicon-dark.png" media="(prefers-color-scheme: dark)" />
+  <link rel="stylesheet" href="/css/style.css" />
+  <style>
+    .nf-wrap {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--dark-forest);
+      padding: 2rem;
+    }
+
+    .nf-card {
+      text-align: center;
+      max-width: 520px;
+    }
+
+    .nf-card img {
+      height: 72px;
+      margin: 0 auto 2rem;
+    }
+
+    .nf-code {
+      font-size: clamp(4rem, 12vw, 6rem);
+      font-weight: 900;
+      line-height: 1;
+      color: var(--green-300);
+      letter-spacing: -0.03em;
+    }
+
+    .nf-title {
+      font-size: var(--font-size-2xl);
+      font-weight: 800;
+      color: var(--white);
+      margin-top: 1rem;
+    }
+
+    .nf-sub {
+      color: rgba(255, 255, 255, 0.75);
+      margin: 1rem 0 2rem;
+      line-height: 1.7;
+    }
+
+    .nf-links {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+  </style>
+</head>
+
+<body>
+  <main class="nf-wrap">
+    <div class="nf-card">
+      <img src="/assets/logo-white.svg" alt="BioViL Logo" />
+      <div class="nf-code">404</div>
+      <h1 class="nf-title">This page seems to have decomposed.</h1>
+      <p class="nf-sub">The page you're looking for doesn't exist or has moved.
+        Like good farm waste, let's turn this dead end into something useful.</p>
+      <div class="nf-links">
+        <a href="/" class="btn btn-white">← Back to Home</a>
+        <a href="/contact.html" class="btn btn-outline">Contact Us</a>
+      </div>
+    </div>
+  </main>
+</body>
+
+</html>

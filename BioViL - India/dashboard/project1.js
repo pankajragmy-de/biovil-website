@@ -1,32 +1,8 @@
-// Initialize Icons
-lucide.createIcons();
+// Initialize Icons — guarded: a blocked CDN must not abort this file
+if (typeof lucide !== 'undefined') lucide.createIcons();
 
-// --- DYNAMIC DATA GENERATION: ASSAM CLIMATE & TIME PROGRESSION ---
-function pseudoRandom(seed) {
-    let x = Math.sin(seed) * 10000;
-    return x - Math.floor(x);
-}
-
-function generateProjectData() {
-    const startDate = new Date(2026, 0, 15);
-    const currentDate = new Date();
-    const yieldCurve = [0.016, 0.018, 0.026, 0.030, 0.033, 0.035, 0.035, 0.034, 0.032, 0.028, 0.022, 0.017];
-    
-    let totalWaste = 0;
-    let dateCursor = new Date(startDate);
-    let weekIndex = 0;
-    while (dateCursor <= currentDate) {
-        let baseWaste = (weekIndex === 0) ? 70 : 140;
-        let fluctuation = 1.0 + (pseudoRandom(weekIndex * 123.45) * 0.3 - 0.15); 
-        totalWaste += Math.round(baseWaste * fluctuation);
-        dateCursor.setDate(dateCursor.getDate() + 7);
-        weekIndex++;
-    }
-    
-    let totalCO2e = Math.round(totalWaste * 0.73);
-    return { totalCO2e };
-}
-
+// Impact data comes from the shared model in data.js (loaded first),
+// so this page and index.html always report identical numbers.
 const pData = generateProjectData();
 
 // Wait for DOM to load before updating elements
@@ -37,10 +13,12 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 });
 
-// Chart Defaults
-Chart.defaults.color = '#94a3b8';
-Chart.defaults.font.family = "'Outfit', sans-serif";
-Chart.defaults.scale.grid.color = 'rgba(255, 255, 255, 0.05)';
+// Chart Defaults — guarded like lucide above
+if (typeof Chart !== 'undefined') {
+    Chart.defaults.color = '#94a3b8';
+    Chart.defaults.font.family = "'Outfit', sans-serif";
+    Chart.defaults.scale.grid.color = 'rgba(255, 255, 255, 0.05)';
+}
 
 // Chart instance holders
 let charts = {};
@@ -48,7 +26,7 @@ let charts = {};
 // ─── Chart factory helpers ───
 function createBarChart(canvasId, storeKey) {
     const ctx = document.getElementById(canvasId)?.getContext('2d');
-    if (!ctx) return;
+    if (!ctx || typeof Chart === 'undefined') return;
     if (charts[storeKey]) charts[storeKey].destroy();
 
     charts[storeKey] = new Chart(ctx, {
@@ -89,7 +67,7 @@ function createBarChart(canvasId, storeKey) {
 
 function createDoughnutChart(canvasId, storeKey, legendId) {
     const ctx = document.getElementById(canvasId)?.getContext('2d');
-    if (!ctx) return;
+    if (!ctx || typeof Chart === 'undefined') return;
     if (charts[storeKey]) charts[storeKey].destroy();
 
     const data = [218, 220.1];
@@ -125,7 +103,7 @@ function createDoughnutChart(canvasId, storeKey, legendId) {
 
 function initBudgetChart() {
     const ctx = document.getElementById('budgetChart')?.getContext('2d');
-    if (!ctx) return;
+    if (!ctx || typeof Chart === 'undefined') return;
     if (charts.budget) charts.budget.destroy();
 
     // Category totals only. Line-item breakdown is kept in the internal
@@ -175,9 +153,12 @@ document.addEventListener('DOMContentLoaded', () => {
     initChartsForTab('tracker-tab');
 
     // ─── URL Hash Routing (for cross-page navigation from index.html) ───
+    // CSS.escape: a crafted hash (e.g. containing `"` or `]`) would make
+    // the selector invalid, and the SyntaxError thrown here would prevent
+    // the tab and sidebar listeners below from ever binding.
     const hash = window.location.hash.replace('#', '');
     if (hash) {
-        const targetNavItem = document.querySelector(`.nav-item[data-tab="${hash}"]`);
+        const targetNavItem = document.querySelector(`.nav-item[data-tab="${CSS.escape(hash)}"]`);
         if (targetNavItem) {
             // Deactivate all
             document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
@@ -219,7 +200,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (toggleBtn) {
         toggleBtn.addEventListener('click', () => {
             sidebar.classList.toggle('expanded');
-            lucide.createIcons();
+            if (typeof lucide !== 'undefined') lucide.createIcons();
         });
     }
 });

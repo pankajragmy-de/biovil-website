@@ -1,10 +1,14 @@
-// Initialize Icons
-lucide.createIcons();
+// Initialize Icons — guarded: unpkg/jsDelivr are intermittently blocked on
+// some Indian mobile ISPs, and an unguarded top-level throw here would kill
+// the whole file (KPIs, charts, sidebar) with no visible error.
+if (typeof lucide !== 'undefined') lucide.createIcons();
 
 // Chart Defaults for consistent premium look
-Chart.defaults.color = '#94a3b8';
-Chart.defaults.font.family = "'Outfit', sans-serif";
-Chart.defaults.scale.grid.color = 'rgba(255, 255, 255, 0.05)';
+if (typeof Chart !== 'undefined') {
+    Chart.defaults.color = '#94a3b8';
+    Chart.defaults.font.family = "'Outfit', sans-serif";
+    Chart.defaults.scale.grid.color = 'rgba(255, 255, 255, 0.05)';
+}
 
 const gradientPrimary = (ctx) => {
     const canvas = ctx.chart.canvas;
@@ -24,69 +28,20 @@ const gradientSecondary = (ctx) => {
     return gradient;
 };
 
-// --- DYNAMIC DATA GENERATION: ASSAM CLIMATE & TIME PROGRESSION ---
-function pseudoRandom(seed) {
-    let x = Math.sin(seed) * 10000;
-    return x - Math.floor(x);
-}
-
-function generateProjectData() {
-    const startDate = new Date(2026, 0, 15); // Jan 15, 2026
-    const currentDate = new Date(); // Current real-time date
-    
-    // Assam monthly biogas yield multiplier (m³ per kg of waste)
-    // Jan/Feb cold (0.016), peaks in Summer July/Aug (0.035)
-    const yieldCurve = [0.016, 0.018, 0.026, 0.030, 0.033, 0.035, 0.035, 0.034, 0.032, 0.028, 0.022, 0.017];
-    
-    let labels = [];
-    let wasteData = [];
-    let biogasData = [];
-    
-    let totalWaste = 0;
-    let totalBiogas = 0;
-    
-    // Generate week-by-week
-    let dateCursor = new Date(startDate);
-    let weekIndex = 0;
-    while (dateCursor <= currentDate) {
-        let month = dateCursor.getMonth();
-        let weekLabel = 'W' + Math.ceil(dateCursor.getDate() / 7) + ' ' + (new Intl.DateTimeFormat('en-US', {month: 'short'}).format(dateCursor));
-        labels.push(weekLabel);
-        
-        // Random fluctuation +/- 15% to weekly waste (140kg base)
-        let baseWaste = (weekIndex === 0) ? 70 : 140; // first week partial
-        let fluctuation = 1.0 + (pseudoRandom(weekIndex * 123.45) * 0.3 - 0.15); 
-        let weeklyWaste = Math.round(baseWaste * fluctuation);
-        
-        // Biogas yield depends on month temperature + tiny random noise
-        let baseYield = yieldCurve[month];
-        let yieldFluctuation = 1.0 + (pseudoRandom(weekIndex * 678.9) * 0.1 - 0.05); 
-        let weeklyBiogas = Number((weeklyWaste * baseYield * yieldFluctuation).toFixed(1));
-        
-        wasteData.push(weeklyWaste);
-        biogasData.push(weeklyBiogas);
-        totalWaste += weeklyWaste;
-        totalBiogas += weeklyBiogas;
-        
-        // Advance 7 days
-        dateCursor.setDate(dateCursor.getDate() + 7);
-        weekIndex++;
-    }
-    
-    // 600kg waste = 218kg CO2. Wood displaces 220.1kg CO2. Overall multiplier ~0.73 per kg waste processed.
-    let totalCO2e = Math.round(totalWaste * 0.73);
-    let totalSmokeFree = weekIndex * 21; // ~21 hours saved per week
-    
-    return { labels, wasteData, biogasData, totalWaste, totalBiogas: Math.round(totalBiogas), totalCO2e, totalSmokeFree };
-}
-
+// Impact data comes from the shared model in data.js (loaded first),
+// so this page and project1.html always report identical numbers.
 const pData = generateProjectData();
 
-// Update DOM KPIs automatically
-document.getElementById('kpi-co2').textContent = pData.totalCO2e.toLocaleString();
-document.getElementById('kpi-waste').textContent = pData.totalWaste.toLocaleString();
-document.getElementById('kpi-biogas').textContent = pData.totalBiogas.toLocaleString();
-document.getElementById('kpi-smoke').textContent = pData.totalSmokeFree.toLocaleString();
+// Update DOM KPIs automatically (null-safe: a missing element must not
+// abort the rest of the file)
+const setKpi = (id, value) => {
+    const el = document.getElementById(id);
+    if (el) el.textContent = value;
+};
+setKpi('kpi-co2', pData.totalCO2e.toLocaleString());
+setKpi('kpi-waste', pData.totalWaste.toLocaleString());
+setKpi('kpi-biogas', pData.totalBiogas.toLocaleString());
+setKpi('kpi-smoke', pData.totalSmokeFree.toLocaleString());
 
 // Update date filter label dynamically based on elapsed time
 const dateLabel = document.getElementById('date-filter-label');
@@ -100,8 +55,8 @@ if (dateLabel) {
 }
 
 // 1. Main Trend Chart — Dynamic Weekly Production Rates
-const ctxTrend = document.getElementById('trendChart').getContext('2d');
-new Chart(ctxTrend, {
+const ctxTrend = document.getElementById('trendChart')?.getContext('2d');
+if (ctxTrend && typeof Chart !== 'undefined') new Chart(ctxTrend, {
     type: 'line',
     data: {
         labels: pData.labels,
@@ -173,12 +128,12 @@ new Chart(ctxTrend, {
 });
 
 // 2. Feedstock Composition — Real data: 100% Animal Manure from Project 1
-const ctxComposition = document.getElementById('compositionChart').getContext('2d');
+const ctxComposition = document.getElementById('compositionChart')?.getContext('2d');
 const compositionData = [100];
 const compositionLabels = ['Animal Manure (Cow Dung)'];
 const compositionColors = ['#fbbf24'];
 
-new Chart(ctxComposition, {
+if (ctxComposition && typeof Chart !== 'undefined') new Chart(ctxComposition, {
     type: 'doughnut',
     data: {
         labels: compositionLabels,
@@ -211,7 +166,7 @@ new Chart(ctxComposition, {
 
 // Build custom legend for Doughnut chart
 const legendContainer = document.getElementById('compositionLegend');
-compositionLabels.forEach((label, i) => {
+if (legendContainer) compositionLabels.forEach((label, i) => {
     const item = document.createElement('div');
     item.className = 'legend-item';
     item.innerHTML = `
@@ -225,8 +180,8 @@ compositionLabels.forEach((label, i) => {
 });
 
 // 3. Active Biodigester Systems — Real: 1 system (Rampur) operational
-const ctxAdoption = document.getElementById('adoptionChart').getContext('2d');
-new Chart(ctxAdoption, {
+const ctxAdoption = document.getElementById('adoptionChart')?.getContext('2d');
+if (ctxAdoption && typeof Chart !== 'undefined') new Chart(ctxAdoption, {
     type: 'bar',
     data: {
         labels: ['Jan 2026', 'Feb 2026', 'Mar 2026'],
@@ -265,6 +220,6 @@ const toggleBtn = document.getElementById('sidebar-toggle');
 if (toggleBtn) {
     toggleBtn.addEventListener('click', () => {
         sidebar.classList.toggle('expanded');
-        lucide.createIcons();
+        if (typeof lucide !== 'undefined') lucide.createIcons();
     });
 }

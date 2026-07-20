@@ -2,6 +2,11 @@
    BioViL — Main JavaScript
    ============================================ */
 
+// --- Footer year (markup carries the current year as fallback) ---
+document.querySelectorAll('.js-year').forEach(el => {
+  el.textContent = new Date().getFullYear();
+});
+
 // --- Navbar scroll behavior ---
 const navbar = document.querySelector('.navbar');
 if (navbar) {
@@ -229,15 +234,23 @@ const hPanels = document.querySelectorAll('.h-panel');
 if (hTrack && hContent) {
   let targetProgress = 0;
   let currentProgress = 0;
-  
+  let hScrollActive = false;
+
   window.addEventListener('scroll', () => {
     const rect = hTrack.getBoundingClientRect();
     const trackTop = rect.top;
-    
+
     const distance = rect.height - window.innerHeight;
     let p = -trackTop / distance;
     targetProgress = Math.max(0, Math.min(1, p));
-  });
+
+    // (Re)start the render loop only when there is work to do;
+    // it parks itself once the eased position settles.
+    if (!hScrollActive) {
+      hScrollActive = true;
+      requestAnimationFrame(renderHScroll);
+    }
+  }, { passive: true });
 
   function renderHScroll() {
     const delta = targetProgress - currentProgress;
@@ -258,11 +271,13 @@ if (hTrack && hContent) {
           panel.classList.remove('in-view');
         }
       });
+      requestAnimationFrame(renderHScroll);
+    } else {
+      hScrollActive = false;
     }
-
-    requestAnimationFrame(renderHScroll);
   }
   requestAnimationFrame(renderHScroll);
+  hScrollActive = true;
 }
 
 // --- Accordion ---
@@ -320,7 +335,7 @@ if (contactForm) {
     const formData = new FormData(contactForm);
     const encoded = new URLSearchParams(formData).toString();
 
-    fetch('/', {
+    fetch(contactForm.action, {
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
         body: encoded
@@ -337,8 +352,9 @@ if (contactForm) {
             throw new Error('Network response was not ok');
         }
     })
-    .catch(() => {
-        alert('Oops! There was a problem submitting your form. Please check your connection and try again.');
+    .catch((err) => {
+        console.error('Contact form submission failed:', err);
+        alert('Sorry — we could not send your message right now. Please email us directly at contact@biovil.co.in and we will get back to you within 48 hours.');
         let countdown = 5;
         submitBtn.innerHTML = `Try again in ${countdown}s`;
         const timer = setInterval(() => {
@@ -394,6 +410,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Toggle Chat Window
   chatbotToggle.addEventListener('click', () => {
     chatbotWindow.classList.add('open');
+    chatbotToggle.setAttribute('aria-expanded', 'true');
     chatbotToggle.style.transform = 'scale(0)';
     setTimeout(() => chatbotInput.focus(), 300);
   });
@@ -401,6 +418,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Close Chat Window
   chatbotClose.addEventListener('click', () => {
     chatbotWindow.classList.remove('open');
+    chatbotToggle.setAttribute('aria-expanded', 'false');
     chatbotToggle.style.transform = 'scale(1)';
   });
 
@@ -420,11 +438,15 @@ document.addEventListener('DOMContentLoaded', () => {
     appendMessage(message, 'user-message');
     chatbotInput.value = '';
 
+    // Lock input while "typing" so rapid submits can't stack indicators
+    chatbotInput.disabled = true;
     showTypingIndicator();
     setTimeout(() => {
       removeTypingIndicator();
       const response = getBotResponse(message);
       appendMessage(response, 'bot-message');
+      chatbotInput.disabled = false;
+      chatbotInput.focus();
     }, 1500 + Math.random() * 1000);
   });
 
@@ -437,19 +459,21 @@ document.addEventListener('DOMContentLoaded', () => {
     scrollToBottom();
   }
 
+  let typingIndicatorEl = null;
+
   function showTypingIndicator() {
     const indicator = document.createElement('div');
     indicator.className = 'typing-indicator';
-    indicator.id = 'typing-indicator';
     indicator.innerHTML = '<span></span><span></span><span></span>';
     chatbotMessages.appendChild(indicator);
+    typingIndicatorEl = indicator;
     scrollToBottom();
   }
 
   function removeTypingIndicator() {
-    const indicator = document.getElementById('typing-indicator');
-    if (indicator) {
-      indicator.remove();
+    if (typingIndicatorEl) {
+      typingIndicatorEl.remove();
+      typingIndicatorEl = null;
     }
   }
 
@@ -462,7 +486,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const lowerInput = input.toLowerCase();
 
     if (lowerInput.includes('cost') || lowerInput.includes('price') || lowerInput.includes('pay') || lowerInput.includes('euro')) {
-      return "BioViL operates on a subsidized cooperative model. We received €3,000 in fellowship funding to build our first prototype. For farmers, the system is highly affordable as it pays for itself via energy savings and fertilizer generation within months. Would you like to join as a partner or investor?";
+      return "BioViL operates on a subsidized cooperative model. We received €3,000 in fellowship funding to build our first prototype. For farmers, the system is highly affordable as it pays for itself via energy savings and fertilizer generation within months. Interested in partnering or investing? Email us directly at contact@biovil.co.in.";
     }
     
     if (lowerInput.includes('biogas') || lowerInput.includes('how it works') || lowerInput.includes('technology')) {
@@ -486,6 +510,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Default Fallback
-    return "That's a great question! I'm still a demo AI, so I might not have all the specific details yet. I'd recommend checking out our 'Resource' or 'About Us' pages, or emailing contact@biovil.co.in for more info.";
+    return "That's a great question! I don't have all the specific details yet. I'd recommend checking out our 'Resource' or 'About Us' pages, or emailing contact@biovil.co.in for more info.";
   }
 });

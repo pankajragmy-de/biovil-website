@@ -7,7 +7,7 @@
   <meta http-equiv="X-Content-Type-Options" content="nosniff" />
   <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin" />
   <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=()" />
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' https://fonts.googleapis.com 'unsafe-inline'; font-src https://fonts.gstatic.com; img-src 'self' https://images.unsplash.com data: blob:; connect-src 'self'; frame-src 'none'; object-src 'none'; base-uri 'self'; form-action 'none';" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' https://images.unsplash.com data: blob:; connect-src 'self'; frame-src 'none'; object-src 'none'; base-uri 'self'; form-action 'none';" />
   <title>Prototype I | BioViL</title>
   <meta name="description"
     content="Engineering Autonomy in Assam, the story behind BioViL's first working fixed-dome biodigester." />
@@ -591,7 +591,7 @@
 
       <!-- Panel 1 -->
       <div class="gallery-panel">
-        <img src="https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=1920&q=80" alt="Excavation">
+        <img loading="lazy" src="https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=1920&q=80" alt="Excavation">
         <div class="gallery-panel__caption">
           <div class="gallery-panel__step">01. Excavation</div>
           <h3 class="gallery-panel__title">Breaking Ground</h3>
@@ -602,7 +602,7 @@
 
       <!-- Panel 2 -->
       <div class="gallery-panel">
-        <img src="https://images.unsplash.com/photo-1531206715517-5c0ba140b2b8?w=1920&q=80" alt="Brickwork">
+        <img loading="lazy" src="https://images.unsplash.com/photo-1531206715517-5c0ba140b2b8?w=1920&q=80" alt="Brickwork">
         <div class="gallery-panel__caption">
           <div class="gallery-panel__step">02. Masonry</div>
           <h3 class="gallery-panel__title">The Reactor Dome</h3>
@@ -613,7 +613,7 @@
 
       <!-- Panel 3 -->
       <div class="gallery-panel">
-        <img src="https://images.unsplash.com/photo-1605000797499-95a51c5269ae?w=1920&q=80" alt="Piping">
+        <img loading="lazy" src="https://images.unsplash.com/photo-1605000797499-95a51c5269ae?w=1920&q=80" alt="Piping">
         <div class="gallery-panel__caption">
           <div class="gallery-panel__step">03. Pipeline</div>
           <h3 class="gallery-panel__title">Gas Distribution</h3>
@@ -624,7 +624,7 @@
 
       <!-- Panel 4 -->
       <div class="gallery-panel">
-        <img src="https://images.unsplash.com/photo-1466611653911-95081537e5b7?w=1920&q=80" alt="Cooking Flame">
+        <img loading="lazy" src="https://images.unsplash.com/photo-1466611653911-95081537e5b7?w=1920&q=80" alt="Cooking Flame">
         <div class="gallery-panel__caption">
           <div class="gallery-panel__step">04. The Result</div>
           <h3 class="gallery-panel__title">Clean Energy</h3>
@@ -656,7 +656,7 @@
       <div class="footer__grid">
         <div>
           <div class="footer__logo-container">
-            <img src="assets/logo-white.svg" alt="BioViL Logo" class="footer__logo-img">
+            <img loading="lazy" src="assets/logo-white.svg" alt="BioViL Logo" class="footer__logo-img">
             <span class="footer__logo-text">BioViL</span>
           </div>
           <p class="footer__brand-text">
@@ -723,8 +723,8 @@
         </div>
       </div>
       <div class="footer__bottom">
-        <span>© 2025 BioViL. All rights reserved.</span>
-        <span>A project under the beVisioneers: The Mercedes-Benz Fellowship.</span>
+        <span>© <span class="js-year">2026</span> BioViL. All rights reserved.</span>
+        <span><a href="privacy.html" style="color:inherit;">Privacy</a> · A project under the beVisioneers: The Mercedes-Benz Fellowship.</span>
       </div>
     </div>
   </footer>

@@ -7,7 +7,7 @@
   <meta http-equiv="X-Content-Type-Options" content="nosniff" />
   <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin" />
   <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=()" />
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://unpkg.com 'unsafe-inline'; style-src 'self' https://fonts.googleapis.com 'unsafe-inline'; font-src https://fonts.gstatic.com; img-src 'self' https://images.unsplash.com https://upload.wikimedia.org data: blob:; connect-src 'self' https://api.staticforms.xyz; frame-src 'none'; object-src 'none'; base-uri 'self'; form-action 'self' https://api.staticforms.xyz;" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdnjs.cloudflare.com 'unsafe-inline'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' https://images.unsplash.com https://upload.wikimedia.org data: blob:; connect-src 'self'; frame-src 'none'; object-src 'none'; base-uri 'self'; form-action 'self';" />
   <title>BioViL | Clean Biogas Energy for Rural India</title>
   <meta name="description" content="BioViL converts agricultural and household waste into clean, affordable biogas, creating energy independence for rural communities across India." />
   
@@ -422,7 +422,7 @@
     <div class="container">
       <div class="two-col-mission collapse-grid-mobile">
         <div class="reveal">
-          <img src="https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=800&q=80"
+          <img loading="lazy" src="https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=800&q=80"
             alt="Rural farming context in India"
             style="width:100%;border-radius:var(--radius-lg);box-shadow:var(--shadow-lg);object-fit:cover;aspect-ratio:4/3;">
         </div>
@@ -750,7 +750,7 @@
       <div class="footer__grid">
         <div>
           <div class="footer__logo-container">
-          <img src="assets/logo-white.svg" alt="BioViL Logo" class="footer__logo-img">
+          <img loading="lazy" src="assets/logo-white.svg" alt="BioViL Logo" class="footer__logo-img">
           <span class="footer__logo-text">BioViL</span>
         </div>
           <p class="footer__brand-text">
@@ -811,8 +811,8 @@
         </div>
       </div>
       <div class="footer__bottom">
-        <span>© 2025 BioViL. All rights reserved.</span>
-        <span>A project under the beVisioneers: The Mercedes-Benz Fellowship.</span>
+        <span>© <span class="js-year">2026</span> BioViL. All rights reserved.</span>
+        <span><a href="privacy.html" style="color:inherit;">Privacy</a> · A project under the beVisioneers: The Mercedes-Benz Fellowship.</span>
       </div>
     </div>
   </footer>
@@ -834,14 +834,14 @@
         <button id="chatbot-close" aria-label="Close Chat">✕</button>
       </div>
       
-      <div id="chatbot-messages" class="chatbot-messages">
+      <div id="chatbot-messages" class="chatbot-messages" role="log" aria-live="polite" aria-label="Chat messages">
         <div class="chat-message bot-message">
-          Hello! I'm the BioViL AI Assistant. How can I help you today? You can ask me about biogas, our impact, or how to get involved.
+          Hello! I'm the BioViL Assistant. How can I help you today? You can ask me about biogas, our impact, or how to get involved.
         </div>
       </div>
 
       <form id="chatbot-form" class="chatbot-form">
-        <input type="text" id="chatbot-input" placeholder="Type your question..." required autocomplete="off" maxlength="500">
+        <input type="text" id="chatbot-input" placeholder="Type your question..." aria-label="Type your question" required autocomplete="off" maxlength="500">
         <button type="submit" aria-label="Send Message">
           <svg class="icon-svg" viewBox="0 0 24 24" style="width:18px;height:18px;">
             <line x1="22" y1="2" x2="11" y2="13"></line>
@@ -852,7 +852,7 @@
     </div>
 
     <!-- Toggle Button -->
-    <button id="chatbot-toggle" class="chatbot-toggle" aria-label="Open Chat">
+    <button id="chatbot-toggle" class="chatbot-toggle" aria-label="Open Chat" aria-expanded="false" aria-controls="chatbot-window">
       <svg class="icon-svg chat-icon-open" viewBox="0 0 24 24">
         <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
       </svg>
