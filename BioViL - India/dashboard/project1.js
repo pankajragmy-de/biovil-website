@@ -128,13 +128,8 @@ function initBudgetChart() {
     if (!ctx) return;
     if (charts.budget) charts.budget.destroy();
 
-    // Verified from "03. Budget Overview - 7647.xlsx"
-    // Materials, Supplies & Equipment: €174 + €1,048 + €267 + €70 = €1,559
-    // Infrastructure (laptop, web dev, logo): €672 + €200 + €80 = €952
-    // Professional Services & Vendors: €183 + €120.35 = €303.35
-    // Operational Expenses (transport): €115
-    // Software & Licenses (domain): €70.65
-    // TOTAL: €3,000.00
+    // Category totals only. Line-item breakdown is kept in the internal
+    // budget workbook, not in publicly served source.
     charts.budget = new Chart(ctx, {
         type: 'doughnut',
         data: {

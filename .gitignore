@@ -8,3 +8,16 @@ resources/
 # Logs
 *.log
 npm-debug.log*
+
+# Internal docs and source assets — tracked files here are served publicly
+BioViL - India/dashboard/Documentation/
+BioViL - India/logo/
+
+# Credentials — never commit
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+secrets.json
+credentials.json
