@@ -6,11 +6,22 @@
     <meta http-equiv="X-Content-Type-Options" content="nosniff" />
     <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin" />
     <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=()" />
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdn.jsdelivr.net https://unpkg.com 'unsafe-inline'; style-src 'self' https://fonts.googleapis.com 'unsafe-inline'; font-src https://fonts.gstatic.com; img-src 'self' data: blob:; connect-src 'self'; frame-src 'none'; object-src 'none'; base-uri 'self'; form-action 'none';" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdn.jsdelivr.net https://unpkg.com 'unsafe-inline'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: blob:; connect-src 'self'; frame-src 'none'; object-src 'none'; base-uri 'self'; form-action 'none';" />
     <title>BioViL Impact Dashboard</title>
+    <meta name="description" content="Live monitoring of BioViL's environmental and social KPIs: CO2e avoided, waste diverted, biogas produced and smoke-free cooking hours across our biodigester systems in Assam, India." />
+    <link rel="canonical" href="https://biovil.co.in/dashboard/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://biovil.co.in/dashboard/" />
+    <meta property="og:title" content="BioViL Impact Dashboard" />
+    <meta property="og:description" content="Live monitoring of BioViL's environmental and social KPIs: CO2e avoided, waste diverted, biogas produced and smoke-free cooking hours." />
+    <meta property="og:image" content="https://biovil.co.in/assets/logo-colour.png" />
+    <meta property="twitter:card" content="summary" />
+    <meta property="twitter:title" content="BioViL Impact Dashboard" />
+    <meta property="twitter:description" content="Live monitoring of BioViL's environmental and social KPIs." />
+    <meta property="twitter:image" content="https://biovil.co.in/assets/logo-colour.png" />
     <link rel="stylesheet" href="style.css">
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet" crossorigin="anonymous">
+    <!-- Web fonts (self-hosted) -->
+    <link href="../assets/fonts/fonts.css" rel="stylesheet">
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@0.344.0/dist/umd/lucide.min.js" integrity="sha384-tTkFttkBclaU1cloKwOi9xk3pbao3VZxTjLNBt8iFABWDBQibbAbWpVmO28zMuxq" crossorigin="anonymous"></script>
     <!-- Chart.js -->
@@ -24,7 +35,7 @@
         <aside class="sidebar glass-panel" id="sidebar">
             <div class="brand">
                 <img src="../assets/logo-colour.svg" alt="BioViL Logo" class="brand-logo">
-                <h2 class="brand-text">BioViL</h2>
+                <div class="brand-text" role="presentation">BioViL</div>
             </div>
 
             <!-- Sidebar Toggle Button (visible on small screens) -->
@@ -90,7 +101,7 @@
                     </div>
                     <div class="kpi-details">
                         <p class="kpi-label">CO₂e Avoided</p>
-                        <h3 class="kpi-value"><span id="kpi-co2">1,021</span> <span class="unit">kg</span></h3>
+                        <h2 class="kpi-value"><span id="kpi-co2">1,021</span> <span class="unit">kg</span></h2>
                         <p class="kpi-trend positive"><i data-lucide="trending-up"></i> ~1.02 tons cumulative</p>
                     </div>
                 </div>
@@ -101,7 +112,7 @@
                     </div>
                     <div class="kpi-details">
                         <p class="kpi-label">Waste Diverted</p>
-                        <h3 class="kpi-value"><span id="kpi-waste">1,400</span> <span class="unit">kg</span></h3>
+                        <h2 class="kpi-value"><span id="kpi-waste">1,400</span> <span class="unit">kg</span></h2>
                         <p class="kpi-trend positive"><i data-lucide="trending-up"></i> 600 kg/mo manure</p>
                     </div>
                 </div>
@@ -112,7 +123,7 @@
                     </div>
                     <div class="kpi-details">
                         <p class="kpi-label">Biogas Produced</p>
-                        <h3 class="kpi-value"><span id="kpi-biogas">47</span> <span class="unit">m³</span></h3>
+                        <h2 class="kpi-value"><span id="kpi-biogas">47</span> <span class="unit">m³</span></h2>
                         <p class="kpi-trend positive"><i data-lucide="trending-up"></i> ~20 m³/month</p>
                     </div>
                 </div>
@@ -123,7 +134,7 @@
                     </div>
                     <div class="kpi-details">
                         <p class="kpi-label">Smoke-Free Hours</p>
-                        <h3 class="kpi-value"><span id="kpi-smoke">210</span> <span class="unit">hrs</span></h3>
+                        <h2 class="kpi-value"><span id="kpi-smoke">210</span> <span class="unit">hrs</span></h2>
                         <p class="kpi-trend positive"><i data-lucide="trending-up"></i> ~3 hrs/day saved</p>
                     </div>
                 </div>
@@ -134,7 +145,7 @@
                 <!-- Main Trend Chart -->
                 <div class="chart-card glass-panel main-chart">
                     <div class="chart-header">
-                        <h3>Biogas Output & Waste Input</h3>
+                        <h2>Biogas Output & Waste Input</h2>
                         <button class="icon-btn"><i data-lucide="more-horizontal"></i></button>
                     </div>
                     <div class="chart-container">
@@ -145,7 +156,7 @@
                 <!-- Doughnut Chart -->
                 <div class="chart-card glass-panel side-chart">
                     <div class="chart-header">
-                        <h3>Feedstock Composition</h3>
+                        <h2>Feedstock Composition</h2>
                     </div>
                     <div class="chart-container doughnut-container">
                         <canvas id="compositionChart"></canvas>
@@ -156,7 +167,7 @@
                 <!-- Secondary Bar Chart -->
                 <div class="chart-card glass-panel bottom-chart">
                     <div class="chart-header">
-                        <h3>Active Biodigester Systems</h3>
+                        <h2>Active Biodigester Systems</h2>
                     </div>
                     <div class="chart-container bar-container">
                         <canvas id="adoptionChart"></canvas>
@@ -166,7 +177,7 @@
                 <!-- Progress Goals Chart -->
                 <div class="chart-card glass-panel bottom-chart">
                     <div class="chart-header">
-                        <h3>Pioneer Phase Scaling Goal</h3>
+                        <h2>Pioneer Phase Scaling Goal</h2>
                     </div>
                     <div class="goal-container">
                         <div class="circular-progress">
@@ -196,6 +207,7 @@
     </div>
 
     <!-- Initialize Scripts -->
+    <script src="data.js"></script>
     <script src="script.js"></script>
 </body>
 </html>

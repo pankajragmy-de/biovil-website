@@ -6,10 +6,21 @@
     <meta http-equiv="X-Content-Type-Options" content="nosniff" />
     <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin" />
     <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=()" />
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdn.jsdelivr.net https://unpkg.com 'unsafe-inline'; style-src 'self' https://fonts.googleapis.com 'unsafe-inline'; font-src https://fonts.gstatic.com; img-src 'self' data: blob:; connect-src 'self'; frame-src 'none'; object-src 'none'; base-uri 'self'; form-action 'none';" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdn.jsdelivr.net https://unpkg.com 'unsafe-inline'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: blob:; connect-src 'self'; frame-src 'none'; object-src 'none'; base-uri 'self'; form-action 'none';" />
     <title>BioViL Project Dashboard - Rampur, Assam</title>
+    <meta name="description" content="Project-level dashboard for BioViL's first biodigester in Rampur, Assam: emissions avoided, system specifications, budget allocation and social impact." />
+    <link rel="canonical" href="https://biovil.co.in/dashboard/project1.html" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://biovil.co.in/dashboard/project1.html" />
+    <meta property="og:title" content="BioViL Project Dashboard - Rampur, Assam" />
+    <meta property="og:description" content="Project-level dashboard for BioViL's first biodigester in Rampur, Assam." />
+    <meta property="og:image" content="https://biovil.co.in/assets/logo-colour.png" />
+    <meta property="twitter:card" content="summary" />
+    <meta property="twitter:title" content="BioViL Project Dashboard - Rampur, Assam" />
+    <meta property="twitter:description" content="Project-level dashboard for BioViL's first biodigester in Rampur, Assam." />
+    <meta property="twitter:image" content="https://biovil.co.in/assets/logo-colour.png" />
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet" crossorigin="anonymous">
+    <link href="../assets/fonts/fonts.css" rel="stylesheet">
     <script src="https://unpkg.com/lucide@0.344.0/dist/umd/lucide.min.js" integrity="sha384-tTkFttkBclaU1cloKwOi9xk3pbao3VZxTjLNBt8iFABWDBQibbAbWpVmO28zMuxq" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js" integrity="sha384-JUh163oCRItcbPme8pYnROHQMC6fNKTBWtRG3I3I0erJkzNgL7uxKlNwcrcFKeqF" crossorigin="anonymous"></script>
     <link rel="icon" type="image/png" href="../assets/favicon-dark.png" media="(prefers-color-scheme: light)" />
@@ -21,7 +32,7 @@
         <aside class="sidebar glass-panel" id="sidebar">
             <div class="brand">
                 <img src="../assets/logo-colour.svg" alt="BioViL Logo" class="brand-logo">
-                <h2 class="brand-text">BioViL</h2>
+                <div class="brand-text" role="presentation">BioViL</div>
             </div>
             
             <!-- Sidebar Toggle Button (visible on small screens) -->
@@ -130,7 +141,7 @@
                             </div>
                             <div class="kpi-details">
                                 <p class="kpi-label">CO₂e Avoided (Cumulative)</p>
-                                <h3 class="kpi-value"><span id="kpi-co2">1,021</span> <span class="unit">kg</span></h3>
+                                <h2 class="kpi-value"><span id="kpi-co2">1,021</span> <span class="unit">kg</span></h2>
                                 <p class="kpi-trend positive"><i data-lucide="trending-up"></i> ~1.02 tons (2.3 months)</p>
                             </div>
                         </div>
@@ -141,7 +152,7 @@
                             </div>
                             <div class="kpi-details">
                                 <p class="kpi-label">Animal Waste Diverted</p>
-                                <h3 class="kpi-value">600 <span class="unit">kg/mo</span></h3>
+                                <h2 class="kpi-value">600 <span class="unit">kg/mo</span></h2>
                                 <p class="kpi-trend positive"><i data-lucide="trending-up"></i> 100% capacity</p>
                             </div>
                         </div>
@@ -152,7 +163,7 @@
                             </div>
                             <div class="kpi-details">
                                 <p class="kpi-label">Community Empowerment</p>
-                                <h3 class="kpi-value">4 <span class="unit">Trained</span></h3>
+                                <h2 class="kpi-value">4 <span class="unit">Trained</span></h2>
                                 <p class="kpi-trend positive"><i data-lucide="trending-up"></i> +5 Jobs Created</p>
                             </div>
                         </div>
@@ -163,7 +174,7 @@
                             </div>
                             <div class="kpi-details">
                                 <p class="kpi-label">Project Milestones</p>
-                                <h3 class="kpi-value">1 <span class="unit">Registered</span></h3>
+                                <h2 class="kpi-value">1 <span class="unit">Registered</span></h2>
                                 <p class="kpi-trend positive"><i data-lucide="check-circle"></i> Phase 1 Completed</p>
                             </div>
                         </div>
@@ -173,7 +184,7 @@
                     <section class="profile-grid">
                         <div class="glass-panel profile-panel">
                             <div class="chart-header">
-                                <h3>Project Specifications</h3>
+                                <h2>Project Specifications</h2>
                             </div>
                             <ul class="specs-list">
                                 <li><strong>Location:</strong> Rampur, Assam, India</li>
@@ -187,17 +198,17 @@
 
                         <div class="glass-panel profile-panel">
                             <div class="chart-header">
-                                <h3>Funds Raised</h3>
+                                <h2>Funds Raised</h2>
                             </div>
                             <div class="budget-tracker">
                                 <div class="budget-stats">
                                     <div>
                                         <p class="kpi-label">Grant Funding</p>
-                                        <h3 class="kpi-value value-emerald">€3,000</h3>
+                                        <h2 class="kpi-value value-emerald">€3,000</h2>
                                     </div>
                                     <div style="text-align: right;">
                                         <p class="kpi-label">Private Equity</p>
-                                        <h3 class="kpi-value value-amber">+ €600</h3>
+                                        <h2 class="kpi-value value-amber">+ €600</h2>
                                     </div>
                                 </div>
                                 <div class="progress-bar-container">
@@ -212,7 +223,7 @@
                     <section class="charts-grid">
                         <div class="chart-card glass-panel main-chart">
                             <div class="chart-header">
-                                <h3>Emissions: Baseline vs. BioViL</h3>
+                                <h2>Emissions: Baseline vs. BioViL</h2>
                             </div>
                             <div class="chart-container">
                                 <canvas id="trackerEmissionsChart"></canvas>
@@ -220,7 +231,7 @@
                         </div>
                         <div class="chart-card glass-panel side-chart">
                             <div class="chart-header">
-                                <h3>Sources of Avoided Emissions</h3>
+                                <h2>Sources of Avoided Emissions</h2>
                             </div>
                             <div class="chart-container doughnut-container">
                                 <canvas id="trackerSourceChart"></canvas>
@@ -239,7 +250,7 @@
                             </div>
                             <div class="kpi-details">
                                 <p class="kpi-label">Total Monthly Offset</p>
-                                <h3 class="kpi-value">438.1 <span class="unit">kg CO₂e</span></h3>
+                                <h2 class="kpi-value">438.1 <span class="unit">kg CO₂e</span></h2>
                                 <p class="kpi-trend positive"><i data-lucide="trending-up"></i> Waste 218 + Wood 220.1</p>
                             </div>
                         </div>
@@ -249,7 +260,7 @@
                             </div>
                             <div class="kpi-details">
                                 <p class="kpi-label">Methane Capture (Waste)</p>
-                                <h3 class="kpi-value">218 <span class="unit">kg CO₂e/mo</span></h3>
+                                <h2 class="kpi-value">218 <span class="unit">kg CO₂e/mo</span></h2>
                                 <p class="kpi-trend positive"><i data-lucide="check-circle"></i> 600 kg manure digested</p>
                             </div>
                         </div>
@@ -259,7 +270,7 @@
                             </div>
                             <div class="kpi-details">
                                 <p class="kpi-label">Firewood Displacement</p>
-                                <h3 class="kpi-value">220.1 <span class="unit">kg CO₂e/mo</span></h3>
+                                <h2 class="kpi-value">220.1 <span class="unit">kg CO₂e/mo</span></h2>
                                 <p class="kpi-trend positive"><i data-lucide="check-circle"></i> 120 kg wood replaced</p>
                             </div>
                         </div>
@@ -268,7 +279,7 @@
                     <section class="charts-grid" style="margin-bottom: 2rem;">
                         <div class="chart-card glass-panel main-chart">
                             <div class="chart-header">
-                                <h3>Monthly Emissions: Baseline vs. Active BioViL</h3>
+                                <h2>Monthly Emissions: Baseline vs. Active BioViL</h2>
                             </div>
                             <div class="chart-container">
                                 <canvas id="emissionsChart"></canvas>
@@ -276,7 +287,7 @@
                         </div>
                         <div class="chart-card glass-panel side-chart">
                             <div class="chart-header">
-                                <h3>Sources of Avoided Emissions</h3>
+                                <h2>Sources of Avoided Emissions</h2>
                             </div>
                             <div class="chart-container doughnut-container">
                                 <canvas id="sourceChart"></canvas>
@@ -295,7 +306,7 @@
                             </div>
                             <div class="kpi-details">
                                 <p class="kpi-label">Jobs Created</p>
-                                <h3 class="kpi-value">5 <span class="unit">Experts</span></h3>
+                                <h2 class="kpi-value">5 <span class="unit">Experts</span></h2>
                                 <p class="kpi-trend positive"><i data-lucide="trending-up"></i> Target 1 → Achieved 5</p>
                             </div>
                         </div>
@@ -305,7 +316,7 @@
                             </div>
                             <div class="kpi-details">
                                 <p class="kpi-label">Operators Trained</p>
-                                <h3 class="kpi-value">4 <span class="unit">Locals</span></h3>
+                                <h2 class="kpi-value">4 <span class="unit">Locals</span></h2>
                                 <p class="kpi-trend positive"><i data-lucide="trending-up"></i> Target 2 → 200%</p>
                             </div>
                         </div>
@@ -315,7 +326,7 @@
                             </div>
                             <div class="kpi-details">
                                 <p class="kpi-label">Company Registered</p>
-                                <h3 class="kpi-value">1 <span class="unit">Organization</span></h3>
+                                <h2 class="kpi-value">1 <span class="unit">Organization</span></h2>
                                 <p class="kpi-trend positive"><i data-lucide="check-circle"></i> Completed</p>
                             </div>
                         </div>
@@ -323,7 +334,7 @@
                     <section class="profile-grid" style="grid-template-columns: 1fr 1fr;">
                         <div class="glass-panel profile-panel">
                             <div class="chart-header">
-                                <h3>Community Capacity Building</h3>
+                                <h2>Community Capacity Building</h2>
                             </div>
                             <ul class="specs-list" style="margin-top: 1.5rem; gap: 1.5rem;">
                                 <li><strong>Jobs Created:</strong> 5 Local Experts Hired for Construction</li>
@@ -334,7 +345,7 @@
                         </div>
                         <div class="glass-panel profile-panel">
                             <div class="chart-header">
-                                <h3>Budget Utilization (€3,000 Grant)</h3>
+                                <h2>Budget Utilization (€3,000 Grant)</h2>
                             </div>
                             <div class="chart-container doughnut-container" style="height: 250px;">
                                 <canvas id="budgetChart"></canvas>
@@ -352,7 +363,7 @@
                             </div>
                             <div class="kpi-details">
                                 <p class="kpi-label">Operational Status</p>
-                                <h3 class="kpi-value" style="color: var(--accent-env);">Active</h3>
+                                <h2 class="kpi-value" style="color: var(--accent-env);">Active</h2>
                                 <p class="kpi-trend positive">Since January 15, 2026</p>
                             </div>
                         </div>
@@ -362,7 +373,7 @@
                             </div>
                             <div class="kpi-details">
                                 <p class="kpi-label">Internal Temperature</p>
-                                <h3 class="kpi-value">-- <span class="unit">°C</span></h3>
+                                <h2 class="kpi-value">-- <span class="unit">°C</span></h2>
                                 <p class="kpi-trend">Awaiting IoT Sensor</p>
                             </div>
                         </div>
@@ -372,7 +383,7 @@
                             </div>
                             <div class="kpi-details">
                                 <p class="kpi-label">Biogas Pressure</p>
-                                <h3 class="kpi-value">-- <span class="unit">kPa</span></h3>
+                                <h2 class="kpi-value">-- <span class="unit">kPa</span></h2>
                                 <p class="kpi-trend">Awaiting IoT Sensor</p>
                             </div>
                         </div>
@@ -384,6 +395,7 @@
     </div>
 
     <!-- Initialize Scripts -->
+    <script src="data.js"></script>
     <script src="project1.js"></script>
 </body>
 </html>

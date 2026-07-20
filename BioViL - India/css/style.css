@@ -2,27 +2,37 @@
    BioViL — Global Design System
    ============================================ */
 
-/* --- Google Fonts --- */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+/* --- Web fonts (self-hosted, see assets/fonts/fonts.css) --- */
+@import url('../assets/fonts/fonts.css');
 
 /* --- CSS Custom Properties (Design Tokens) --- */
 :root {
   /* Brand Greens */
   --green-50:  #e8f5e9;
   --green-100: #c8e6c9;
+  --green-200: #a5d6a7;
   --green-300: #81c784;
+  --green-400: #66bb6a;
   --green-500: #1B5520;
+  --green-600: #115419;
   --green-700: #075312;
   --green-900: #00270d;
 
   /* Brand Blues */
   --blue-50:   #e3f2fd;
   --blue-100:  #bbdefb;
+  --blue-200:  #90caf9;
+  --blue-300:  #64b5f6;
+  --blue-400:  #42a5f5;
   --blue-500:  #0869B0;
   --blue-700:  #0C3C8E;
   --blue-900:  #0a2566;
 
+  /* Accents (used by hero feature icons on dark surfaces) */
+  --yellow-400: #ffca28;
+
   /* Brand Reds */
+  --red-400:   #ef5350;
   --red-500:   #8B2A21;
   --red-700:   #6a1a13;
 
@@ -34,6 +44,7 @@
   --grey-50:  #F5F5F5;
   --grey-100: #E5E5E5;
   --grey-200: #D8D8D8;
+  --grey-300: #BDBDBD;
   --grey-400: #9E9E9E;
   --grey-600: #6B7280;
   --grey-700: #4B5563;
@@ -71,6 +82,7 @@
   --shadow-sm: 0 1px 3px rgba(0,0,0,0.07);
   --shadow-md: 0 4px 24px rgba(0,0,0,0.08);
   --shadow-lg: 0 8px 40px rgba(0,0,0,0.12);
+  --shadow-xl: 0 16px 56px rgba(0,0,0,0.16);
 
   /* Transitions */
   --transition: 0.25s ease;
@@ -1713,12 +1725,84 @@ ul { list-style: none; }
 
 /* ============================================
    RESPONSIVE
+   Breakpoints must descend (1024 → 900 → 768 → …):
+   at equal specificity the later block wins, so a
+   wide block placed after a narrow one silently
+   overrides phones. Keep this order when adding.
    ============================================ */
 @media (max-width: 1024px) {
   .card-grid { grid-template-columns: repeat(2, 1fr); }
   .footer__grid { grid-template-columns: 1fr 1fr; }
   .two-col-mission { gap: 2.5rem; }
   .stats-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* --- TABLETS (Below 900px max-width) --- */
+@media (max-width: 900px) {
+  /* Typography & Spacing */
+  :root {
+    --section-padding: 4rem 0;
+  }
+
+  .section-title {
+    font-size: clamp(1.8rem, 5vw, 2.5rem);
+  }
+
+  /* Grids */
+  .card-grid,
+  .card-grid-2 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 3rem 2rem;
+  }
+
+  .problem-grid,
+  .two-col-mission,
+  .form-grid {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+
+  .process-flow {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 3rem 2rem;
+  }
+
+  /* Timeline */
+  .timeline::before {
+    left: 40px;
+  }
+
+  .timeline-item {
+    grid-template-columns: 80px 1fr;
+    margin-bottom: 2.5rem;
+  }
+
+  .timeline-item__dot {
+    grid-column: 1;
+    justify-content: flex-start;
+    padding-left: 30px;
+  }
+
+  .timeline-item__card,
+  .timeline-item:nth-child(even) .timeline-item__card,
+  .timeline-item:nth-child(odd) .timeline-item__card {
+    grid-column: 2;
+    margin: 0;
+  }
+
+  .timeline-item__empty {
+    display: none;
+  }
+
+  /* Footer */
+  .footer__grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 3rem 2rem;
+  }
 }
 
 @media (max-width: 768px) {
@@ -1753,84 +1837,6 @@ ul { list-style: none; }
   .stats-grid { grid-template-columns: repeat(2, 1fr); }
   .form-grid { grid-template-columns: 1fr; }
   .tab-btn { padding: 0.75rem 1rem; font-size: var(--font-size-xs); }
-}
-
-@media (max-width: 480px) {
-  .btn-group { flex-direction: column; }
-  .btn { width: 100%; justify-content: center; }
-  .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
-}
-
-/* ============================================
-   RESPONSIVE DESIGN (Media Queries)
-   ============================================ */
-
-/* --- TABLETS (Below 900px max-width) --- */
-@media (max-width: 900px) {
-  /* Typography & Spacing */
-  :root {
-    --section-padding: 4rem 0;
-  }
-  
-  .section-title {
-    font-size: clamp(1.8rem, 5vw, 2.5rem);
-  }
-  
-  /* Grids */
-  .card-grid,
-  .card-grid-2 {
-    grid-template-columns: repeat(2, 1fr);
-  }
-  
-  .stats-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 3rem 2rem;
-  }
-  
-  .problem-grid,
-  .two-col-mission,
-  .form-grid {
-    grid-template-columns: 1fr;
-    gap: 2.5rem;
-  }
-  
-  .process-flow {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 3rem 2rem;
-  }
-  
-  /* Timeline */
-  .timeline::before {
-    left: 40px;
-  }
-  
-  .timeline-item {
-    grid-template-columns: 80px 1fr !important;
-    margin-bottom: 2.5rem;
-  }
-  
-  .timeline-item__dot {
-    grid-column: 1 !important;
-    justify-content: flex-start;
-    padding-left: 30px;
-  }
-  
-  .timeline-item__card,
-  .timeline-item:nth-child(even) .timeline-item__card,
-  .timeline-item:nth-child(odd) .timeline-item__card {
-    grid-column: 2 !important;
-    margin: 0 !important;
-  }
-
-  .timeline-item__empty {
-    display: none !important;
-  }
-
-  /* Footer */
-  .footer__grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 3rem 2rem;
-  }
 }
 
 /* --- MOBILE PHONES (Below 600px max-width) --- */
@@ -1909,6 +1915,11 @@ ul { list-style: none; }
   .circular-content-panel {
     padding: 2rem 1.5rem;
   }
+}
+
+@media (max-width: 480px) {
+  .btn-group { flex-direction: column; }
+  .btn { width: 100%; justify-content: center; }
 }
 
 /* Fix for inline collapse grids */
@@ -2136,6 +2147,9 @@ ul { list-style: none; }
   flex-direction: column;
   overflow: hidden;
   opacity: 0;
+  /* visibility keeps the hidden window's controls out of the tab
+     order — pointer-events alone only blocks the mouse */
+  visibility: hidden;
   pointer-events: none;
   transform: translateY(20px) scale(0.95);
   transform-origin: bottom right;
@@ -2145,6 +2159,7 @@ ul { list-style: none; }
 
 .chatbot-window.open {
   opacity: 1;
+  visibility: visible;
   pointer-events: auto;
   transform: translateY(0) scale(1);
 }
@@ -2327,5 +2342,37 @@ ul { list-style: none; }
     width: calc(100vw - 2rem);
     height: calc(100vh - 6rem);
     max-height: 500px;
+  }
+}
+
+/* ============================================
+   ACCESSIBILITY
+   ============================================ */
+
+/* Visible keyboard focus — the default ring is invisible against
+   the dark green and navy fills used on buttons and links. */
+a:focus-visible,
+button:focus-visible,
+.btn:focus-visible,
+.tab-btn:focus-visible,
+.accordion-header:focus-visible,
+.nav-link:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 3px solid var(--blue-500);
+  outline-offset: 2px;
+}
+
+/* Respect the user's motion preference: stop scroll-driven and
+   looping animation, keep opacity so content is never hidden. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }
