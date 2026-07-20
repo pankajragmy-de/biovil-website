@@ -1771,7 +1771,9 @@ ul { list-style: none; }
     gap: 3rem 2rem;
   }
 
-  /* Timeline */
+  /* Timeline — the nth-child selector forms are required: the base
+     rules around line 1030 are .timeline-item:nth-child(…) .timeline-item__dot
+     (specificity 0-3-0), which a bare .timeline-item__dot cannot override. */
   .timeline::before {
     left: 40px;
   }
@@ -1781,8 +1783,11 @@ ul { list-style: none; }
     margin-bottom: 2.5rem;
   }
 
-  .timeline-item__dot {
+  .timeline-item__dot,
+  .timeline-item:nth-child(even) .timeline-item__dot,
+  .timeline-item:nth-child(odd) .timeline-item__dot {
     grid-column: 1;
+    grid-row: 1;
     justify-content: flex-start;
     padding-left: 30px;
   }
@@ -1791,10 +1796,12 @@ ul { list-style: none; }
   .timeline-item:nth-child(even) .timeline-item__card,
   .timeline-item:nth-child(odd) .timeline-item__card {
     grid-column: 2;
+    grid-row: 1;
     margin: 0;
   }
 
-  .timeline-item__empty {
+  .timeline-item__empty,
+  .timeline-item:nth-child(even) .timeline-item__empty {
     display: none;
   }
 
@@ -1830,6 +1837,10 @@ ul { list-style: none; }
     grid-column: 1;
     grid-row: 1;
     padding-top: 1.5rem;
+    /* Reset the tablet (900px) block's left offset: the phone gutter is
+       40px with the line at 20px, so the dot must center in its column. */
+    justify-content: center;
+    padding-left: 0;
   }
 
   .footer__grid { grid-template-columns: 1fr; gap: 2rem; }
@@ -2277,6 +2288,13 @@ ul { list-style: none; }
 
 #chatbot-input:focus {
   border-color: var(--green-300);
+}
+
+/* The ID rule above wins over the sitewide input:focus-visible outline
+   (1-0-0 beats 0-1-1), so keyboard focus needs its own ID-level rule. */
+#chatbot-input:focus-visible {
+  outline: 3px solid var(--blue-500);
+  outline-offset: 2px;
 }
 
 .chatbot-form button {

@@ -156,8 +156,12 @@ if (visionEl) {
 }
 
 // --- Sticky Scroll Animation (Home) ---
+// Skipped under prefers-reduced-motion: this timeline loops forever,
+// which the CSS reduce block cannot stop (it is JS-driven, not a CSS
+// animation).
 const processTrack = document.getElementById("process-track");
-if (processTrack && typeof gsap !== 'undefined') {
+if (processTrack && typeof gsap !== 'undefined'
+    && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
   const processCards = processTrack.querySelectorAll(".process-card");
   if (processCards.length > 0) {
   const tl = gsap.timeline({ repeat: -1 });
@@ -225,60 +229,6 @@ if (processTrack && typeof gsap !== 'undefined') {
 }
 
 
-
-// --- Horizontal Scroll (Resource) ---
-const hTrack = document.getElementById('h-scroll-track');
-const hContent = document.getElementById('h-scroll-content');
-const hPanels = document.querySelectorAll('.h-panel');
-
-if (hTrack && hContent) {
-  let targetProgress = 0;
-  let currentProgress = 0;
-  let hScrollActive = false;
-
-  window.addEventListener('scroll', () => {
-    const rect = hTrack.getBoundingClientRect();
-    const trackTop = rect.top;
-
-    const distance = rect.height - window.innerHeight;
-    let p = -trackTop / distance;
-    targetProgress = Math.max(0, Math.min(1, p));
-
-    // (Re)start the render loop only when there is work to do;
-    // it parks itself once the eased position settles.
-    if (!hScrollActive) {
-      hScrollActive = true;
-      requestAnimationFrame(renderHScroll);
-    }
-  }, { passive: true });
-
-  function renderHScroll() {
-    const delta = targetProgress - currentProgress;
-    if (Math.abs(delta) > 0.0005) {
-      currentProgress += delta * 0.08;
-
-      hContent.style.transform = `translateX(-${currentProgress * 75}vw)`;
-      document.body.style.setProperty('--scroll-p', currentProgress);
-
-      hPanels.forEach((panel, i) => {
-        const centerProgress = i * (1 / (hPanels.length - 1 || 1));
-        let localOffset = currentProgress - centerProgress;
-        localOffset = Math.max(-1, Math.min(1, localOffset));
-        panel.style.setProperty('--local-offset', localOffset);
-        if (Math.abs(localOffset) < 0.4) {
-          panel.classList.add('in-view');
-        } else {
-          panel.classList.remove('in-view');
-        }
-      });
-      requestAnimationFrame(renderHScroll);
-    } else {
-      hScrollActive = false;
-    }
-  }
-  requestAnimationFrame(renderHScroll);
-  hScrollActive = true;
-}
 
 // --- Accordion ---
 document.querySelectorAll('.accordion-header').forEach(header => {
@@ -383,6 +333,9 @@ document.querySelectorAll('[data-scroll-to]').forEach(el => {
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   anchor.addEventListener('click', function(e) {
     const id = this.getAttribute('href');
+    // Bare "#" (dropdown toggles, placeholder links) is not a valid
+    // selector — querySelector('#') throws and the page jumps to top.
+    if (!id || id === '#') return;
     const target = document.querySelector(id);
     if (target) {
       e.preventDefault();
